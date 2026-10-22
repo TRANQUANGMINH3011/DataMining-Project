@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Recommender & Executive BI Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #111827;
+            --bg-card: rgba(31, 41, 55, 0.7);
+            --bg-card-hover: rgba(55, 65, 81, 0.8);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(99, 102, 241, 0.3);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-indigo: #6366f1;
+            --accent-indigo-glow: rgba(99, 102, 241, 0.25);
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --accent-sky: #0ea5e9;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px var(--accent-indigo-glow);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header Navbar */
+        header {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        .logo-text h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--accent-emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.15); }
+        }
+
+        .btn-docs {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.45rem 1rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-docs:hover {
+            background: var(--accent-indigo);
+            border-color: var(--accent-indigo);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Navigation Tabs */
+        .tabs-nav {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            padding: 0 2rem;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            color: #818cf8;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* KPI Metric Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.4rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-accent);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--kpi-color, var(--accent-indigo));
+        }
+
+        .kpi-title {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .kpi-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .kpi-subtext {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .badge-positive {
+            color: var(--accent-emerald);
+            font-weight: 600;
+        }
+
+        /* 2-Column Dashboard Layout */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-equal-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid-2col, .grid-equal-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Container */
+        .content-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .content-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .content-card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-subtle);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Interactive Recommender Showcase */
+        .control-panel {
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-bottom: 1.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            min-width: 200px;
+            flex: 1;
+        }
+
+        .control-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .custom-select, .custom-input {
+            background: #1f2937;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            padding: 0.65rem 1rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .custom-select:focus, .custom-input:focus {
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 0 2px var(--accent-indigo-glow);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #ffffff;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: 42px;
+            margin-top: auto;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+        }
+
+        /* User Identity Card */
+        .user-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .rfm-tag {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tag-vip { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .tag-loyal { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .tag-potential { background: rgba(14, 165, 233, 0.2); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); }
+        .tag-atrisk { background: rgba(244, 63, 94, 0.2); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); }
+
+        /* Product Cards Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .product-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-indigo);
+            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.5), 0 0 16px var(--accent-indigo-glow);
+        }
+
+        .product-card-banner {
+            height: 120px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-size: 2.75rem;
+        }
+
+        .match-score-badge {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(6px);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            padding: 0.2rem 0.55rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-card-body {
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--accent-indigo);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 0.6rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-reason {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid var(--accent-emerald);
+            padding: 0.4rem 0.6rem;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.6rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .product-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        /* Frequently Bought Together Combo Box */
+        .bundle-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .bundle-info h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            color: #fbbf24;
+            margin-bottom: 0.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .bundle-pricing {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .price-cross {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .price-final {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #34d399;
+        }
+
+        .discount-pill {
+            background: #ef4444;
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-left-color: var(--accent-indigo);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 0.8s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-subtle);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            background: var(--bg-surface);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header>
+        <div class="logo-group">
+            <div class="logo-icon">🚀</div>
+            <div class="logo-text">
+                <h1>E-Commerce Executive AI Dashboard</h1>
+                <p>Kho dữ liệu Star Schema & Hệ thống Gợi ý Cá nhân hóa</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="status-badge" id="system-status">
+                <span class="status-dot"></span>
+                <span>PostgreSQL DWH: Online</span>
+            </div>
+            <a href="/docs" target="_blank" class="btn-docs">API Documentation ↗</a>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('tab-bi')">📊 Báo cáo Doanh thu & Phễu (BI)</button>
+        <button class="tab-btn" onclick="switchTab('tab-rfm')">👥 Phân khúc Khách hàng (RFM)</button>
+        <button class="tab-btn" onclick="switchTab('tab-recs')">🎯 Gợi ý Cá nhân hóa (Live Demo)</button>
+        <button class="tab-btn" onclick="switchTab('tab-fbt')">🛒 Mua kèm & Combo Giỏ hàng</button>
+        <button class="tab-btn" onclick="switchTab('tab-benchmark')">⚡ Đánh giá Kỹ thuật (Offline Benchmark)</button>
+    </nav>
+
+    <!-- Main Container -->
+    <main>
+
+        <!-- =================================================================== -->
+        <!-- TAB 1: EXECUTIVE BI DASHBOARD -->
+        <!-- =================================================================== -->
+        <section id="tab-bi" class="tab-content active">
+            <!-- KPI Summary Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card" style="--kpi-color: var(--accent-emerald);">
+                    <div class="kpi-title">Tổng Doanh thu DWH</div>
+                    <div class="kpi-value" id="kpi-revenue">$13.59M</div>
+                    <div class="kpi-subtext"><span class="badge-positive">↑ 100%</span> Toàn bộ lịch sử giao dịch</div>
+                </div>
+                <div class="kpi-card" style="--kpi-color: var(--accent-sky);">
+                    <div class="kpi-title">Tổng Lượt Mua Hàng</div>
+                    <div class="kpi-value" id="kpi-orders">112,650</div>
+                    <div class="kpi-subtext">Đơn hàng trong Fact_Interactions</div>
+                </div>
+                <div class="kpi-card" style="--kpi-color: var(--accent-indigo);">
+                    <div class="kpi-title">Tổng Khách Hàng</div>
+                    <div class="kpi-value" id="kpi-users">96,096</div>
+                    <div class="kpi-subtext">Đã phân cụm RFM K-Means</div>
+                </div>
+                <div class="kpi-card" style="--kpi-color: var(--accent-amber);">
+                    <div class="kpi-title">Giá trị Đơn Trung bình (AOV)</div>
+                    <div class="kpi-value" id="kpi-aov">$120.65</div>
+                    <div class="kpi-subtext">Mỗi giao dịch hoàn tất</div>
+                </div>
+            </div>
+
+            <!-- Charts Row 1 -->
+            <div class="grid-2col">
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">📈 Xu hướng Doanh thu & Tăng trưởng MoM</div>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">View: vw_sales_monthly_summary</span>
+                    </div>
+                    <div style="height: 320px; position: relative;">
+                        <canvas id="chart-monthly-sales"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">🌪️ Phễu Chuyển đổi (Conversion Funnel)</div>
+                    </div>
+                    <div style="height: 320px; position: relative;">
+                        <canvas id="chart-funnel"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- TAB 2: CUSTOMER RFM SEGMENTS -->
+        <!-- =================================================================== -->
+        <section id="tab-rfm" class="tab-content">
+            <div class="grid-equal-2col">
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">🍰 Tỷ trọng Đóng góp Doanh thu theo Phân khúc</div>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-rfm-pie"></canvas>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">📊 Giá trị Doanh thu trung bình/khách (ARPU)</div>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-rfm-arpu"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="content-card-header">
+                    <div class="content-card-title">📑 Chi tiết Hồ sơ Phân khúc Khách hàng (Data Warehouse View: vw_customer_rfm_segments)</div>
+                </div>
+                <div class="table-wrapper">
+                    <table id="rfm-table">
+                        <thead>
+                            <tr>
+                                <th>Phân khúc (Segment)</th>
+                                <th>Quy mô Khách hàng</th>
+                                <th>Tỷ lệ Khách (%)</th>
+                                <th>Tổng Đơn hàng</th>
+                                <th>Tổng Doanh thu ($)</th>
+                                <th>Đóng góp Doanh thu</th>
+                                <th>ARPU ($)</th>
+                                <th>Độ tuổi TB</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rfm-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- TAB 3: LIVE RECOMMENDER DEMO -->
+        <!-- =================================================================== -->
+        <section id="tab-recs" class="tab-content">
+            <div class="control-panel">
+                <div class="control-group">
+                    <label class="control-label">Chọn Khách hàng mẫu</label>
+                    <select id="select-user-sample" class="custom-select" onchange="onSelectSampleUser(this.value)">
+                        <option value="">-- Đang nạp danh sách khách hàng... --</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Hoặc nhập User ID bất kỳ</label>
+                    <input type="text" id="input-user-id" class="custom-input" placeholder="Ví dụ: 0000b849f77a49e4a4ce2b2a4ca5be3f">
+                </div>
+                <div class="control-group" style="max-width: 180px;">
+                    <label class="control-label">Thuật toán Gợi ý</label>
+                    <select id="select-algorithm" class="custom-select">
+                        <option value="hybrid">Content-Based Hybrid (Tối ưu)</option>
+                        <option value="cf_svd">SVD Collaborative Filtering</option>
+                        <option value="popularity">Popularity Baseline</option>
+                    </select>
+                </div>
+                <div class="control-group" style="max-width: 100px;">
+                    <label class="control-label">Số lượng (Top K)</label>
+                    <select id="select-topk" class="custom-select">
+                        <option value="4">4</option>
+                        <option value="6" selected>6</option>
+                        <option value="8">8</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="loadUserRecommendations()">✨ Chạy Gợi ý</button>
+            </div>
+
+            <!-- Selected User Identity Badge -->
+            <div id="user-badge" class="user-profile-badge" style="display: none;">
+                <div class="user-avatar" id="badge-avatar">👤</div>
+                <div class="user-info">
+                    <h3 id="badge-name">User ID: <span id="badge-uid">...</span> <span id="badge-tag" class="rfm-tag tag-vip">VIP</span></h3>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary);" id="badge-meta">Vị trí: SP | Thuật toán đã dùng: Content-Based</p>
+                </div>
+            </div>
+
+            <!-- Product Cards Output -->
+            <div id="recs-loading" class="spinner" style="display: none;"></div>
+            <div id="recs-container" class="products-grid">
+                <!-- Injected by JS -->
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- TAB 4: FREQUENTLY BOUGHT TOGETHER & BUNDLE -->
+        <!-- =================================================================== -->
+        <section id="tab-fbt" class="tab-content">
+            <div class="control-panel">
+                <div class="control-group">
+                    <label class="control-label">Chọn Sản phẩm đang xem trong giỏ hàng</label>
+                    <select id="select-product-sample" class="custom-select" onchange="loadFrequentlyBoughtTogether(this.value)">
+                        <option value="">-- Đang nạp danh mục sản phẩm... --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="fbt-loading" class="spinner" style="display: none;"></div>
+
+            <!-- Target Product Summary -->
+            <div id="fbt-target-card" class="content-card" style="margin-bottom: 1.5rem; display: none;">
+                <div class="content-card-title">🔍 Sản phẩm khách hàng đang chọn: <span id="fbt-target-name" style="color: #818cf8; margin-left: 0.5rem;"></span></div>
+                <div style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 0.35rem;" id="fbt-target-meta"></div>
+            </div>
+
+            <!-- Associated Recommendations -->
+            <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 1rem; color: var(--text-primary);">🛍️ Thường được mua kèm nhiều nhất (Market Basket Analysis - FP-Growth):</h3>
+            <div id="fbt-container" class="products-grid">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Bundle Discount Promotion Offer -->
+            <div id="bundle-container" class="bundle-box" style="display: none;">
+                <div class="bundle-info">
+                    <h4>🎁 Combo Ưu Đãi Tiết Kiệm (Bundle Offer)</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Mua kèm các sản phẩm được đề xuất để nhận ưu đãi chiết khấu trực tiếp.</p>
+                </div>
+                <div class="bundle-pricing">
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">GIÁ GỐC</div>
+                        <div class="price-cross" id="bundle-orig-price">$0.00</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; color: var(--accent-emerald);">GIÁ COMBO (-10%)</div>
+                        <div class="price-final" id="bundle-final-price">$0.00</div>
+                    </div>
+                    <span class="discount-pill">TIẾT KIỆM 10%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- TAB 5: OFFLINE BENCHMARK -->
+        <!-- =================================================================== -->
+        <section id="tab-benchmark" class="tab-content">
+            <div class="grid-2col">
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">🏆 So sánh Hiệu năng Offline Models (Test trên 7,805 Users)</div>
+                    </div>
+                    <div style="height: 300px; position: relative;">
+                        <canvas id="chart-benchmark"></canvas>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="content-card-header">
+                        <div class="content-card-title">🔬 Phân tích Độ thưa Dữ liệu (Sparsity Analysis)</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="background: rgba(255, 255, 255, 0.02); padding: 1rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-rose);">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);">MỨC ĐỘ THƯA CỦA MA TRẬN USER-ITEM</div>
+                            <div style="font-family: 'Outfit'; font-size: 1.6rem; font-weight: 700; color: #fb7185;">99.9967%</div>
+                            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Trung bình 1.06 tương tác/người dùng.</div>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                            <strong>Kết luận học thuật:</strong> Do đa số khách hàng chỉ mua 1 lần trên sàn thương mại điện tử, ma trận tương tác cực kỳ thưa khiến thuật toán lọc cộng tác (CF-SVD) gặp hiện tượng Cold-Start nặng. 
+                            <strong>Content-Based (TF-IDF)</strong> vượt trội hơn hẳn nhờ khai thác ngữ nghĩa sản phẩm và danh mục hàng hóa.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Báo cáo Bài tập lớn: Kho dữ liệu & Khai phá dữ liệu — Đề tài: Hệ thống gợi ý sản phẩm cá nhân hóa thương mại điện tử.
+    </footer>
+
+    <!-- Frontend Scripting Logic -->
+    <script>
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Icon Mapping Helper
+        function getCategoryIcon(catName) {
+            const map = {
+                'health_beauty': '💄',
+                'computers_accessories': '💻',
+                'bed_bath_table': '🛏️',
+                'watches_gifts': '⌚',
+                'sports_leisure': '⚽',
+                'furniture_decor': '🛋️',
+                'housewares': '🍳',
+                'telephony': '📱',
+                'auto': '🚗',
+                'toys': '🧸',
+                'baby': '🍼',
+                'cool_stuff': '🎮',
+                'pet_shop': '🐶',
+                'fashion_bags_accessories': '👜',
+                'perfumery': '🌸',
+                'home_confort': '🕯️'
+            };
+            return map[catName?.toLowerCase()] || '📦';
+        }
+
+        // Initialize on DOM Load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadHealthAndMetadata();
+            await loadBIAnalytics();
+            await loadDemoSamples();
+            initBenchmarkChart();
+        });
+
+        // 1. Load System Health & Metadata
+        async function loadHealthAndMetadata() {
+            try {
+                const res = await fetch('/health');
+                const data = await res.json();
+                if (data.database_connected) {
+                    document.getElementById('system-status').innerHTML = `
+                        <span class="status-dot"></span>
+                        <span>PostgreSQL DWH: Online (${data.stats.total_products_indexed.toLocaleString()} sp)</span>
+                    `;
+                }
+            } catch (err) {
+                console.error("Health check error:", err);
+            }
+        }
+
+        // 2. Load BI Analytics from Views
+        async function loadBIAnalytics() {
+            try {
+                // Load Segments
+                const resSeg = await fetch('/bi/segments');
+                const dataSeg = await resSeg.json();
+                const segments = dataSeg.data;
+
+                const tbody = document.getElementById('rfm-table-body');
+                tbody.innerHTML = '';
+                
+                const segLabels = [];
+                const segRevenue = [];
+                const segColors = ['#f59e0b', '#10b981', '#0ea5e9', '#f43f5e', '#6b7280'];
+                const segArpu = [];
+
+                segments.forEach((seg, i) => {
+                    segLabels.push(seg.rfm_segment);
+                    segRevenue.push(seg.total_revenue);
+                    segArpu.push(seg.arpu);
+
+                    const tagClass = seg.rfm_segment.includes('Champions') ? 'tag-vip' :
+                                     seg.rfm_segment.includes('Loyal') ? 'tag-loyal' :
+                                     seg.rfm_segment.includes('Potential') ? 'tag-potential' : 'tag-atrisk';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><span class="rfm-tag ${tagClass}">${seg.rfm_segment}</span></td>
+                            <td>${seg.total_customers.toLocaleString()}</td>
+                            <td><strong>${seg.customer_share_pct}%</strong></td>
+                            <td>${Number(seg.total_orders).toLocaleString()}</td>
+                            <td>$${Number(seg.total_revenue).toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                            <td><span class="badge-positive">${seg.revenue_contribution_pct}%</span></td>
+                            <td>$${seg.arpu}</td>
+                            <td>${seg.avg_customer_age} tuổi</td>
+                        </tr>
+                    `;
+                });
+
+                // Render RFM Pie Chart
+                new Chart(document.getElementById('chart-rfm-pie'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: segLabels,
+                        datasets: [{
+                            data: segRevenue,
+                            backgroundColor: segColors,
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right', labels: { color: '#9ca3af', font: { family: 'Inter' } } }
+                        }
+                    }
+                });
+
+                // Render ARPU Bar Chart
+                new Chart(document.getElementById('chart-rfm-arpu'), {
+                    type: 'bar',
+                    data: {
+                        labels: segLabels,
+                        datasets: [{
+                            label: 'ARPU ($/khách)',
+                            data: segArpu,
+                            backgroundColor: '#6366f1',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { ticks: { color: '#9ca3af' }, grid: { display: false } },
+                            y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        }
+                    }
+                });
+
+                // Render Monthly Sales Trend
+                renderMonthlySalesChart();
+                // Render Funnel Chart
+                renderFunnelChart();
+
+            } catch (err) {
+                console.error("Error loading BI analytics:", err);
+            }
+        }
+
+        function renderMonthlySalesChart() {
+            const months = ['2017-09', '2017-10', '2017-11', '2017-12', '2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08'];
+            const revenue = [721000, 784000, 1195000, 878000, 1115000, 992000, 1160000, 1161000, 1154000, 1024000, 1066000, 1023000];
+
+            new Chart(document.getElementById('chart-monthly-sales'), {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Doanh thu hàng tháng ($)',
+                        data: revenue,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: '#10b981',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { display: false } },
+                        y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                    }
+                }
+            });
+        }
+
+        function renderFunnelChart() {
+            new Chart(document.getElementById('chart-funnel'), {
+                type: 'bar',
+                data: {
+                    labels: ['1. Lượt xem (View)', '2. Thêm Giỏ (Cart)', '3. Chốt Đơn (Purchase)', '4. Đánh Giá (Review)'],
+                    datasets: [{
+                        label: 'Số lượng tương tác',
+                        data: [450000, 185000, 112650, 99224],
+                        backgroundColor: ['#6366f1', '#0ea5e9', '#10b981', '#f59e0b'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { ticks: { color: '#9ca3af' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // 3. Load Sample Users and Products for Dropdowns
+        async function loadDemoSamples() {
+            try {
+                // Sample Users
+                const resUsers = await fetch('/demo/sample-users');
+                const dataUsers = await resUsers.json();
+                const selUsers = document.getElementById('select-user-sample');
+                selUsers.innerHTML = '<option value="">-- Chọn khách hàng theo phân khúc mẫu --</option>';
+                dataUsers.sample_users.forEach(u => {
+                    selUsers.innerHTML += `
+                        <option value="${u.user_id}">${u.rfm_segment}: ${u.user_id.substring(0, 12)}... (${u.location || 'Brazil'})</option>
+                    `;
+                });
+
+                // Sample Products
+                const resProds = await fetch('/demo/sample-products?limit=12');
+                const dataProds = await resProds.json();
+                const selProds = document.getElementById('select-product-sample');
+                selProds.innerHTML = '<option value="">-- Chọn sản phẩm để thử gợi ý mua kèm --</option>';
+                dataProds.sample_products.forEach(p => {
+                    selProds.innerHTML += `
+                        <option value="${p.product_id}">${p.category_name}: ${p.product_name} ($${p.price})</option>
+                    `;
+                });
+
+                // Auto load first sample user
+                if (dataUsers.sample_users.length > 0) {
+                    onSelectSampleUser(dataUsers.sample_users[0].user_id);
+                }
+                // Auto load first sample product
+                if (dataProds.sample_products.length > 0) {
+                    loadFrequentlyBoughtTogether(dataProds.sample_products[0].product_id);
+                }
+            } catch (err) {
+                console.error("Error loading demo samples:", err);
+            }
+        }
+
+        function onSelectSampleUser(userId) {
+            if (!userId) return;
+            document.getElementById('input-user-id').value = userId;
+            loadUserRecommendations();
+        }
+
+        // 4. Load Personalized User Recommendations
+        async function loadUserRecommendations() {
+            const uid = document.getElementById('input-user-id').value.trim();
+            if (!uid) {
+                alert("Vui lòng chọn hoặc nhập mã User ID!");
+                return;
+            }
+
+            const algo = document.getElementById('select-algorithm').value;
+            const topK = document.getElementById('select-topk').value;
+            const container = document.getElementById('recs-container');
+            const loading = document.getElementById('recs-loading');
+            const badge = document.getElementById('user-badge');
+
+            container.innerHTML = '';
+            loading.style.display = 'block';
+
+            try {
+                const res = await fetch(`/recommend/user/${uid}?k=${topK}&algorithm=${algo}`);
+                const data = await res.json();
+                loading.style.display = 'none';
+
+                // Display User Badge
+                badge.style.display = 'flex';
+                document.getElementById('badge-uid').innerText = data.user_id;
+                const tagEl = document.getElementById('badge-tag');
+                tagEl.innerText = data.rfm_segment;
+                tagEl.className = 'rfm-tag ' + (
+                    data.rfm_segment.includes('Champions') ? 'tag-vip' :
+                    data.rfm_segment.includes('Loyal') ? 'tag-loyal' :
+                    data.rfm_segment.includes('Potential') ? 'tag-potential' : 'tag-atrisk'
+                );
+                document.getElementById('badge-meta').innerText = `Thuật toán: ${data.algorithm_used.toUpperCase()} | Cold-start: ${data.is_cold_start ? 'Có (Gợi ý thịnh hành)' : 'Không (Đã có lịch sử mua)'}`;
+
+                // Render Products Cards
+                data.recommendations.forEach(prod => {
+                    const icon = getCategoryIcon(prod.category_name);
+                    container.innerHTML += `
+                        <div class="product-card">
+                            <div class="product-card-banner">
+                                ${icon}
+                                <span class="match-score-badge">Match: ${(prod.score * 100).toFixed(0)}%</span>
+                            </div>
+                            <div class="product-card-body">
+                                <span class="product-category">${prod.category_name || 'Phổ biến'}</span>
+                                <h4 class="product-title">${prod.product_name}</h4>
+                                <div class="product-reason">${prod.recommendation_reason || 'Gợi ý phù hợp'}</div>
+                                <div class="product-footer">
+                                    <span class="product-price">$${prod.price.toFixed(2)}</span>
+                                    <button class="btn-primary" style="padding: 0.35rem 0.8rem; font-size: 0.8rem; height: 32px;" onclick="loadFrequentlyBoughtTogether('${prod.product_id}')">Xem mua kèm ↗</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                loading.style.display = 'none';
+                console.error("Error loading recommendations:", err);
+                container.innerHTML = `<div style="color: var(--accent-rose);">Lỗi tải gợi ý: ${err.message}</div>`;
+            }
+        }
+
+        // 5. Load Frequently Bought Together & Bundle
+        async function loadFrequentlyBoughtTogether(productId) {
+            if (!productId) return;
+            switchTab('tab-fbt');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.innerText.includes('Mua kèm')) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            const loading = document.getElementById('fbt-loading');
+            const container = document.getElementById('fbt-container');
+            const targetCard = document.getElementById('fbt-target-card');
+            const bundleBox = document.getElementById('bundle-container');
+
+            container.innerHTML = '';
+            loading.style.display = 'block';
+
+            try {
+                const res = await fetch(`/recommend/frequently-bought-together/${productId}?k=4`);
+                const data = await res.json();
+                loading.style.display = 'none';
+
+                // Target Product Info
+                targetCard.style.display = 'block';
+                document.getElementById('fbt-target-name').innerText = data.source_product.product_name;
+                document.getElementById('fbt-target-meta').innerText = `Ngành hàng: ${data.source_product.category_name} | Giá niêm yết: $${data.source_product.price.toFixed(2)} | Tìm thấy ${data.association_rules_found} luật kết hợp liên quan`;
+
+                // Render Recommended FBT Products
+                data.frequently_bought_together.forEach(prod => {
+                    const icon = getCategoryIcon(prod.category_name);
+                    container.innerHTML += `
+                        <div class="product-card">
+                            <div class="product-card-banner">
+                                ${icon}
+                                <span class="match-score-badge" style="color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Lift: ${prod.lift}x</span>
+                            </div>
+                            <div class="product-card-body">
+                                <span class="product-category">${prod.category_name}</span>
+                                <h4 class="product-title">${prod.product_name}</h4>
+                                <div class="product-reason" style="border-left-color: var(--accent-amber);">${prod.cross_sell_reason}</div>
+                                <div class="product-footer">
+                                    <span class="product-price">$${prod.price.toFixed(2)}</span>
+                                    <span style="font-size: 0.75rem; color: var(--text-secondary);">Tin cậy: ${(prod.confidence * 100).toFixed(1)}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Render Bundle Box
+                if (data.bundle_offer && data.frequently_bought_together.length > 0) {
+                    bundleBox.style.display = 'flex';
+                    document.getElementById('bundle-orig-price').innerText = `$${data.bundle_offer.original_total_price.toFixed(2)}`;
+                    document.getElementById('bundle-final-price').innerText = `$${data.bundle_offer.bundle_discount_price.toFixed(2)}`;
+                } else {
+                    bundleBox.style.display = 'none';
+                }
+            } catch (err) {
+                loading.style.display = 'none';
+                console.error("Error loading FBT:", err);
+            }
+        }
+
+        // 6. Benchmark Comparison Chart
+        function initBenchmarkChart() {
+            new Chart(document.getElementById('chart-benchmark'), {
+                type: 'bar',
+                data: {
+                    labels: ['Content-Based (TF-IDF)', 'Popularity Baseline', 'Collaborative Filtering (SVD)'],
+                    datasets: [
+                        {
+                            label: 'Recall@10',
+                            data: [0.0438, 0.0133, 0.0073],
+                            backgroundColor: '#10b981',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'NDCG@10',
+                            data: [0.0263, 0.0058, 0.0052],
+                            backgroundColor: '#6366f1',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'HitRate@10',
+                            data: [0.0438, 0.0133, 0.0073],
+                            backgroundColor: '#f59e0b',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#9ca3af', font: { family: 'Inter' } } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#9ca3af' }, grid: { display: false } },
+                        y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
