@@ -5,3 +5,6 @@ __pycache__/
 .streamlit/
 extracted_docx/
 ke-hoach.zip
+node_modules/
+package-lock.json
+assets/test_ss*.png
