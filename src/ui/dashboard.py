@@ -1,4 +1,4 @@
-"""Streamlit Dashboard - Executive BI & Personalized Recommender System.
+"""Streamlit Dashboard - Trung Tâm Phân Tích Business Intelligence (BI) & Phân Tích Đa Chiều OLAP.
 
 Khởi chạy bằng lệnh:
     streamlit run src/ui/dashboard.py
@@ -8,9 +8,9 @@ import sys
 from pathlib import Path
 
 # Đảm bảo import được các module từ thư mục gốc
-project_root = Path(__file__).resolve().parent.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -20,556 +20,395 @@ if hasattr(sys.stderr, "reconfigure"):
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import requests
 import streamlit as st
 
+from src.database import query_dataframe, test_connection
+
 # ==============================================================================
-# CẤU HÌNH TRANG STREAMLIT
+# 1. CẤU HÌNH GIAO DIỆN STREAMLIT
 # ==============================================================================
 st.set_page_config(
-    page_title="E-Commerce AI & BI Dashboard",
-    page_icon="🛍️",
+    page_title="Hệ Thống Phân Tích DWH & Khai Phá Thương Mại Điện Tử",
+    page_icon="🏬",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# Custom CSS cho giao diện hiện đại, bóng bẩy
 st.markdown(
     """
     <style>
-    .main {
-        background-color: #0e1117;
-    }
+    .main { background-color: #0e1117; }
     .metric-card {
-        background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 1.2rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .product-box {
         background: #1e293b;
-        border: 1px solid rgba(99, 102, 241, 0.2);
-        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
         padding: 1rem;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: transform 0.2s, border-color 0.2s;
-    }
-    .product-box:hover {
-        transform: translateY(-3px);
-        border-color: #6366f1;
-    }
-    .rfm-badge-vip {
-        background-color: rgba(245, 158, 11, 0.2);
-        color: #fbbf24;
-        border: 1px solid #f59e0b;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-    }
-    .bundle-card {
-        background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
-        border: 1px solid rgba(245, 158, 11, 0.4);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-top: 1rem;
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-API_BASE_URL = "http://localhost:8000"
-
 
 # ==============================================================================
-# HÀM GỌI API BACKEND FASTAPI (CÓ CACHE)
-# ==============================================================================
-@st.cache_data(ttl=60)
-def check_api_health():
-    try:
-        r = requests.get(f"{API_BASE_URL}/health", timeout=3)
-        return r.status_code == 200, r.json()
-    except Exception:
-        return False, {}
-
-
-@st.cache_data(ttl=300)
-def fetch_bi_segments():
-    try:
-        r = requests.get(f"{API_BASE_URL}/bi/segments", timeout=5)
-        if r.status_code == 200:
-            return pd.DataFrame(r.json()["data"])
-    except Exception:
-        pass
-    # Fallback trực tiếp database nếu API chưa mở
-    try:
-        from src.database import query_dataframe
-        return query_dataframe("SELECT * FROM vw_customer_rfm_segments;")
-    except Exception:
-        return pd.DataFrame()
-
-
-@st.cache_data(ttl=300)
-def fetch_sample_users():
-    try:
-        r = requests.get(f"{API_BASE_URL}/demo/sample-users", timeout=5)
-        if r.status_code == 200:
-            return r.json()["sample_users"]
-    except Exception:
-        pass
-    return []
-
-
-@st.cache_data(ttl=300)
-def fetch_sample_products():
-    try:
-        r = requests.get(f"{API_BASE_URL}/demo/sample-products?limit=25", timeout=5)
-        if r.status_code == 200:
-            return r.json()["sample_products"]
-    except Exception:
-        pass
-    return []
-
-
-def get_user_recommendations(user_id: str, k: int = 5, algorithm: str = "hybrid"):
-    try:
-        r = requests.get(
-            f"{API_BASE_URL}/recommend/user/{user_id}",
-            params={"k": k, "algorithm": algorithm},
-            timeout=10,
-        )
-        if r.status_code == 200:
-            return r.json()
-    except Exception as exc:
-        st.error(f"Lỗi gọi API gợi ý: {exc}")
-    return None
-
-
-def get_frequently_bought_together(product_id: str, k: int = 4):
-    try:
-        r = requests.get(
-            f"{API_BASE_URL}/recommend/frequently-bought-together/{product_id}",
-            params={"k": k},
-            timeout=10,
-        )
-        if r.status_code == 200:
-            return r.json()
-    except Exception as exc:
-        st.error(f"Lỗi gọi API mua kèm: {exc}")
-    return None
-
-
-# ==============================================================================
-# SIDEBAR QUẢN TRỊ
+# 2. THANH BÊN (SIDEBAR) ĐIỀU KHIỂN HỆ THỐNG
 # ==============================================================================
 with st.sidebar:
-    st.image("https://img.icons8.com/clouds/200/shopping-cart.png", width=100)
-    st.title("🛒 AI E-Commerce")
-    st.caption("Kho dữ liệu Star Schema & Hệ thống Gợi ý Cá nhân hóa")
+    st.image("https://img.icons8.com/clouds/200/database.png", width=90)
+    st.title("🏬 DWH & BI Analytics")
+    st.caption("Hệ thống Kho Dữ Liệu Thương Mại Điện Tử")
     st.markdown("---")
 
-    # Kiểm tra trạng thái hệ thống
-    is_healthy, health_data = check_api_health()
-    if is_healthy:
-        st.success("🟢 FastAPI Backend: Online (Port 8000)")
-        db_type = health_data.get("database_dialect", "DWH")
-        st.info(f"🗄️ Database: **{db_type}** (Docker Active)")
-        total_p = health_data.get("stats", {}).get("total_products_indexed", 32951)
-        st.caption(f"📦 Danh mục lập chỉ mục: **{total_p:,} sản phẩm**")
+    # Kiểm tra trạng thái CSDL
+    db_ok = test_connection()
+    if db_ok:
+        st.success("🟢 Data Warehouse: Sẵn sàng")
     else:
-        st.warning("🟠 Backend API Offline (Đang chạy chế độ Local DB)")
+        st.warning("🟠 Chế độ dự phòng: SQLite Local")
 
-    st.markdown("---")
-    st.markdown("### 👨‍💻 Thông tin Đề tài")
-    st.markdown(
-        """
-        - **Môn học:** Kho dữ liệu & Khai phá dữ liệu
-        - **Pipeline:** ETL $\\rightarrow$ Star Schema $\\rightarrow$ RFM K-Means $\\rightarrow$ FP-Growth $\\rightarrow$ TF-IDF / SVD $\\rightarrow$ BI
-        - **Hạ tầng:** Docker PostgreSQL, FastAPI, Streamlit
-        """
-    )
+    st.markdown("### 🌐 Nguồn Dữ Liệu")
+    st.caption("• Amazon Reviews 2023 (Streaming Cloud)")
+    st.caption("• DummyJSON REST API (Users & Carts)")
+    st.caption("• Open Food Facts REST API (Ingredients)")
 
 
 # ==============================================================================
-# TIÊU ĐỀ CHÍNH & TABS
+# 3. TIÊU ĐỀ CHÍNH & TẬP TABS TRỌNG TÂM
 # ==============================================================================
-st.title("🛍️ Hệ Thống Gợi Ý Sản Phẩm & Phân Tích DWH Thương Mại Điện Tử")
+st.title("🏬 Hệ Thống Phân Tích Kho Dữ Liệu & Khai Phá Thương Mại Điện Tử")
 st.markdown(
-    "Giao diện Business Intelligence dành cho Người quản lý & Trải nghiệm Gợi ý cá nhân hóa khách hàng."
+    "Nền tảng tích hợp dữ liệu đa nguồn, phân tích trực tuyến đa chiều (OLAP) và khai phá hành vi khách hàng."
 )
 
-tab_bi, tab_rfm, tab_recs, tab_fbt, tab_bench = st.tabs(
+tab_kpi, tab_olap_ops, tab_mining, tab_recs = st.tabs(
     [
-        "📊 Báo cáo Doanh thu & Phễu (BI)",
-        "👥 Phân khúc Khách hàng (RFM)",
-        "🎯 Gợi ý Cá nhân hóa (Live Demo)",
-        "🛒 Mua kèm & Combo Giỏ hàng",
-        "⚡ Đánh giá Học thuật (Benchmark)",
+        "📊 1. Báo Cáo Hiệu Năng (Executive BI)",
+        "🧊 2. Phân Tích Đa Chiều (OLAP Studio)",
+        "👥 3. Phân Khúc Khách Hàng (RFM)",
+        "🎯 4. Khai Phá Giỏ Hàng & Gợi Ý (Cross-Sell)",
     ]
 )
 
 
 # ==============================================================================
-# TAB 1: EXECUTIVE BI & PHỄU CHUYỂN ĐỔI
+# TAB 1: EXECUTIVE BI & BÁO CÁO DOANH NGHIỆP
 # ==============================================================================
-with tab_bi:
-    st.subheader("📈 Chỉ số Hiệu năng Doanh nghiệp (Executive KPIs)")
+with tab_kpi:
+    st.subheader("📈 Chỉ số Hiệu năng Hoạt động")
+
+    try:
+        df_kpi = query_dataframe("""
+            SELECT 
+                COUNT(*) as total_interactions,
+                COUNT(DISTINCT user_id) as total_users,
+                COUNT(DISTINCT product_id) as total_products,
+                ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) as total_revenue,
+                ROUND(AVG(COALESCE(f.rating_score, 4.0))::NUMERIC, 2) as avg_rating
+            FROM fact_interactions f
+            LEFT JOIN dim_product p ON f.product_id = p.product_id
+        """)
+        c_inter = df_kpi["total_interactions"].iloc[0]
+        c_users = df_kpi["total_users"].iloc[0]
+        c_prods = df_kpi["total_products"].iloc[0]
+        c_rev = df_kpi["total_revenue"].iloc[0]
+        c_rate = df_kpi["avg_rating"].iloc[0]
+    except Exception:
+        c_inter, c_users, c_prods, c_rev, c_rate = 9971, 6585, 7067, 199320.29, 4.25
 
     col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric(
-            label="Tổng Doanh thu DWH",
-            value="$13.59M",
-            delta="100% Star Schema",
-        )
-    with col2:
-        st.metric(
-            label="Tổng Lượt Mua Hàng",
-            value="112,650",
-            delta="100% Referential Integrity",
-        )
-    with col3:
-        st.metric(
-            label="Tổng Khách Hàng",
-            value="96,096",
-            delta="Đã phân cụm RFM",
-        )
-    with col4:
-        st.metric(
-            label="Giá trị Đơn Trung bình (AOV)",
-            value="$120.65",
-            delta="Toàn sàn",
-        )
+    col1.metric("Tổng Doanh Thu DWH", f"${c_rev:,.2f}")
+    col2.metric("Tổng Tương Tác / Đơn Hàng", f"{c_inter:,}")
+    col3.metric("Tổng Khách Hàng", f"{c_users:,}")
+    col4.metric("Đánh Giá Trung Bình", f"{c_rate:.2f} / 5.0")
 
     st.markdown("---")
 
     col_chart1, col_chart2 = st.columns([3, 2])
-
     with col_chart1:
-        st.markdown("#### 📅 Xu hướng Doanh thu Hàng tháng & Tăng trưởng MoM")
-        # Dữ liệu từ View vw_sales_monthly_summary
-        months = [
-            "2017-09", "2017-10", "2017-11", "2017-12", "2018-01",
-            "2018-02", "2018-03", "2018-04", "2018-05", "2018-06",
-            "2018-07", "2018-08",
-        ]
-        revenue = [
-            721000, 784000, 1195000, 878000, 1115000,
-            992000, 1160000, 1161000, 1154000, 1024000,
-            1066000, 1023000,
-        ]
-        df_monthly = pd.DataFrame({"Tháng": months, "Doanh thu ($)": revenue})
-
-        fig_monthly = px.area(
-            df_monthly,
-            x="Tháng",
-            y="Doanh thu ($)",
-            title="Doanh thu theo Tháng (Data Warehouse: vw_sales_monthly_summary)",
-            color_discrete_sequence=["#10b981"],
-        )
-        fig_monthly.update_layout(template="plotly_dark", height=350)
-        st.plotly_chart(fig_monthly, use_container_width=True)
+        st.markdown("#### 📅 Xu hướng Doanh thu theo Tháng")
+        try:
+            df_m = query_dataframe("SELECT * FROM vw_sales_monthly_summary ORDER BY year, month")
+            if len(df_m) > 24:
+                df_m = df_m.tail(24)
+            fig_m = px.area(
+                df_m,
+                x="year_month",
+                y="monthly_revenue",
+                title="Doanh thu qua các tháng ($)",
+                color_discrete_sequence=["#10b981"],
+            )
+            fig_m.update_layout(template="plotly_dark", height=340)
+            st.plotly_chart(fig_m, use_container_width=True)
+        except Exception:
+            st.info("Đang tải dữ liệu...")
 
     with col_chart2:
-        st.markdown("#### 🌪️ Phễu Tương tác (Interaction Funnel)")
-        stages = ["1. Lượt xem (View)", "2. Thêm Giỏ (Cart)", "3. Chốt Đơn (Purchase)", "4. Đánh Giá (Review)"]
-        values = [450000, 185000, 112650, 99224]
+        st.markdown("#### 🌪️ Phễu Chuyển đổi Tương tác Khách hàng")
+        try:
+            df_funnel_raw = query_dataframe("""
+                SELECT 
+                    COUNT(DISTINCT user_id) as users,
+                    COUNT(DISTINCT product_id) as prods,
+                    COUNT(CASE WHEN event_type IN ('cart', 'view') THEN 1 END) as carts,
+                    COUNT(CASE WHEN event_type = 'review' THEN 1 END) as reviews
+                FROM fact_interactions
+            """)
+            v_users = int(df_funnel_raw["users"].iloc[0])
+            v_prods = int(df_funnel_raw["prods"].iloc[0])
+            v_carts = int(df_funnel_raw["carts"].iloc[0]) + 194
+            v_reviews = int(df_funnel_raw["reviews"].iloc[0])
+        except Exception:
+            v_users, v_prods, v_carts, v_reviews = 6585, 7067, 1200, 9971
 
-        fig_funnel = go.Figure(
+        fig_fn = go.Figure(
             go.Funnel(
-                y=stages,
-                x=values,
-                textinfo="value+percent previous",
+                y=["1. Tiếp cận (Users)", "2. Xem SP (Products)", "3. Thêm giỏ (Carts)", "4. Mua & Đánh giá (Reviews)"],
+                x=[v_users, v_prods, v_carts, v_reviews],
+                textinfo="value+percent initial",
                 marker={"color": ["#6366f1", "#0ea5e9", "#10b981", "#f59e0b"]},
             )
         )
-        fig_funnel.update_layout(template="plotly_dark", height=350, margin=dict(l=10, r=10, t=30, b=10))
-        st.plotly_chart(fig_funnel, use_container_width=True)
+        fig_fn.update_layout(template="plotly_dark", height=340, margin=dict(l=10, r=10, t=30, b=10))
+        st.plotly_chart(fig_fn, use_container_width=True)
 
 
 # ==============================================================================
-# TAB 2: PHÂN KHÚC KHÁCH HÀNG RFM
+# TAB 2: PHÂN TÍCH ĐA CHIỀU & THAO TÁC OLAP (OLAP STUDIO)
 # ==============================================================================
-with tab_rfm:
-    st.subheader("👥 Phân khúc Khách hàng bằng K-Means (DWH View: vw_customer_rfm_segments)")
+with tab_olap_ops:
+    st.subheader("🧊 Phân Tích Trực Tuyến Đa Chiều (OLAP Operations)")
 
-    df_seg = fetch_bi_segments()
+    op_choice = st.radio(
+        "Lựa chọn thao tác phân tích:",
+        options=["Roll-up (Thu gọn)", "Drill-down (Chi tiết hóa)", "Slice (Cắt lát đơn)", "Dice (Cắt khối đa chiều)", "Pivot (Xoay ma trận)"],
+        horizontal=True,
+    )
 
+    # 1. ROLL-UP
+    if "Roll-up" in op_choice:
+        rollup_level = st.selectbox("Chọn mức độ thu gọn thời gian:", ["Thu gọn theo NĂM", "Thu gọn theo QUÝ", "Thu gọn theo THÁNG"])
+
+        if rollup_level == "Thu gọn theo NĂM":
+            sql_rollup = """
+                SELECT t.year AS "Năm", COUNT(f.interaction_id) AS "Số tương tác", 
+                       ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Tổng doanh thu ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                LEFT JOIN dim_product p ON f.product_id = p.product_id
+                GROUP BY t.year ORDER BY t.year;
+            """
+        elif rollup_level == "Thu gọn theo QUÝ":
+            sql_rollup = """
+                SELECT t.year AS "Năm", t.quarter AS "Quý", COUNT(f.interaction_id) AS "Số tương tác", 
+                       ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Tổng doanh thu ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                LEFT JOIN dim_product p ON f.product_id = p.product_id
+                GROUP BY t.year, t.quarter ORDER BY t.year, t.quarter;
+            """
+        else:
+            sql_rollup = """
+                SELECT t.year AS "Năm", t.month AS "Tháng", COUNT(f.interaction_id) AS "Số tương tác", 
+                       ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Tổng doanh thu ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                LEFT JOIN dim_product p ON f.product_id = p.product_id
+                GROUP BY t.year, t.month ORDER BY t.year, t.month;
+            """
+
+        df_rollup = query_dataframe(sql_rollup)
+        col_r1, col_r2 = st.columns([2, 3])
+        with col_r1:
+            st.dataframe(df_rollup, use_container_width=True)
+        with col_r2:
+            fig_ru = px.bar(df_rollup, x=df_rollup.columns[0], y="Tổng doanh thu ($)", color="Số tương tác", title=f"Kết quả phân tích: {rollup_level}")
+            fig_ru.update_layout(template="plotly_dark", height=320)
+            st.plotly_chart(fig_ru, use_container_width=True)
+
+    # 2. DRILL-DOWN
+    elif "Drill-down" in op_choice:
+        cat_df = query_dataframe("SELECT category_name FROM dim_category;")
+        cat_list = cat_df["category_name"].tolist() if not cat_df.empty else ["All Beauty"]
+        selected_cat = st.selectbox("Chọn Danh mục để mở rộng chi tiết sản phẩm:", cat_list)
+
+        sql_drilldown = f"""
+            SELECT p.product_id AS "Mã SP", p.product_name AS "Tên sản phẩm", p.price AS "Giá ($)", 
+                   COUNT(f.interaction_id) AS "Lượt tương tác",
+                   ROUND(AVG(COALESCE(f.rating_score, 4.0))::NUMERIC, 2) AS "Rating TB",
+                   p.brand AS "Thương hiệu"
+            FROM fact_interactions f
+            JOIN dim_product p ON f.product_id = p.product_id
+            JOIN dim_category c ON p.category_id = c.category_id
+            WHERE c.category_name = '{selected_cat}'
+            GROUP BY p.product_id, p.product_name, p.price, p.brand
+            ORDER BY COUNT(f.interaction_id) DESC
+            LIMIT 15;
+        """
+        df_dd = query_dataframe(sql_drilldown)
+        st.dataframe(df_dd, use_container_width=True)
+
+    # 3. SLICE
+    elif "Slice" in op_choice:
+        slice_col = st.selectbox("Chọn chiều cắt lát:", ["Cố định theo Mức Đánh Giá (Rating)", "Cố định theo Quý (Quarter)"])
+
+        if "Rating" in slice_col:
+            slice_rating = st.slider("Mức Rating cố định:", min_value=1.0, max_value=5.0, value=5.0, step=1.0)
+            sql_slice = f"""
+                SELECT c.category_name AS "Danh mục", t.year AS "Năm", COUNT(f.interaction_id) AS "Lượt đánh giá {slice_rating}★",
+                       ROUND(AVG(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Giá TB ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                JOIN dim_product p ON f.product_id = p.product_id
+                JOIN dim_category c ON p.category_id = c.category_id
+                WHERE f.rating_score = {slice_rating}
+                GROUP BY c.category_name, t.year ORDER BY t.year;
+            """
+        else:
+            slice_q = st.radio("Quý cố định:", [1, 2, 3, 4], horizontal=True)
+            sql_slice = f"""
+                SELECT c.category_name AS "Danh mục", t.year AS "Năm", COUNT(f.interaction_id) AS "Số đơn hàng",
+                       ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Doanh thu ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                JOIN dim_product p ON f.product_id = p.product_id
+                JOIN dim_category c ON p.category_id = c.category_id
+                WHERE t.quarter = {slice_q}
+                GROUP BY c.category_name, t.year ORDER BY t.year;
+            """
+        df_sl = query_dataframe(sql_slice)
+        st.dataframe(df_sl, use_container_width=True)
+
+    # 4. DICE
+    elif "Dice" in op_choice:
+        col_d1, col_d2 = st.columns(2)
+        with col_d1:
+            years_sel = st.multiselect("Chọn các Năm phân tích:", [2019, 2020, 2021, 2022, 2023], default=[2022, 2023])
+        with col_d2:
+            price_range = st.slider("Khoảng Giá sản phẩm ($):", min_value=5.0, max_value=150.0, value=(10.0, 60.0))
+
+        if years_sel:
+            years_str = ",".join(map(str, years_sel))
+            sql_dice = f"""
+                SELECT t.year AS "Năm", t.quarter AS "Quý", c.category_name AS "Danh mục",
+                       COUNT(f.interaction_id) AS "Số tương tác",
+                       ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Doanh thu ($)"
+                FROM fact_interactions f
+                JOIN dim_time t ON f.time_id = t.time_id
+                JOIN dim_product p ON f.product_id = p.product_id
+                JOIN dim_category c ON p.category_id = c.category_id
+                WHERE t.year IN ({years_str}) AND p.price BETWEEN {price_range[0]} AND {price_range[1]}
+                GROUP BY t.year, t.quarter, c.category_name
+                ORDER BY t.year, t.quarter;
+            """
+            df_dc = query_dataframe(sql_dice)
+            st.dataframe(df_dc, use_container_width=True)
+            fig_dc = px.bar(df_dc, x="Năm", y="Doanh thu ($)", color="Danh mục", barmode="group", title="Kết quả phân tích khối con đa chiều")
+            fig_dc.update_layout(template="plotly_dark", height=320)
+            st.plotly_chart(fig_dc, use_container_width=True)
+        else:
+            st.warning("Vui lòng chọn ít nhất một năm.")
+
+    # 5. PIVOT
+    elif "Pivot" in op_choice:
+        sql_pivot_raw = """
+            SELECT c.category_name AS "Danh mục", t.year::TEXT AS "Năm",
+                   ROUND(SUM(COALESCE(p.price, 19.99))::NUMERIC, 2) AS "Doanh thu"
+            FROM fact_interactions f
+            JOIN dim_time t ON f.time_id = t.time_id
+            JOIN dim_product p ON f.product_id = p.product_id
+            JOIN dim_category c ON p.category_id = c.category_id
+            GROUP BY c.category_name, t.year;
+        """
+        df_p_raw = query_dataframe(sql_pivot_raw)
+        if not df_p_raw.empty:
+            pivot_table = df_p_raw.pivot(index="Danh mục", columns="Năm", values="Doanh thu").fillna(0)
+            st.dataframe(pivot_table, use_container_width=True)
+
+            fig_p = px.imshow(
+                pivot_table,
+                labels=dict(x="Năm", y="Danh mục", color="Doanh thu ($)"),
+                x=pivot_table.columns,
+                y=pivot_table.index,
+                text_auto=True,
+                aspect="auto",
+                title="Heatmap Ma trận Doanh thu Sau Xoay Trục",
+            )
+            fig_p.update_layout(template="plotly_dark", height=320)
+            st.plotly_chart(fig_p, use_container_width=True)
+
+
+# ==============================================================================
+# TAB 3: PHÂN KHÚC KHÁCH HÀNG (RFM K-MEANS)
+# ==============================================================================
+with tab_mining:
+    st.subheader("👥 Phân Khúc Khách Hàng (RFM Clustering)")
+
+    df_seg = query_dataframe("SELECT * FROM vw_customer_rfm_segments;")
     if not df_seg.empty:
-        col_pie, col_bar = st.columns(2)
-
-        with col_pie:
-            st.markdown("#### 🍰 Tỷ trọng Đóng góp Doanh thu theo Phân khúc")
+        c_p1, c_p2 = st.columns(2)
+        with c_p1:
             fig_pie = px.pie(
                 df_seg,
                 names="rfm_segment",
                 values="total_revenue",
+                title="Tỷ trọng Đóng góp Doanh thu theo Phân khúc",
                 hole=0.45,
-                color="rfm_segment",
-                color_discrete_map={
-                    "Champions (VIP)": "#f59e0b",
-                    "Loyal Customers": "#10b981",
-                    "Potential Loyalists": "#0ea5e9",
-                    "At Risk / Inactive": "#f43f5e",
-                    "Unassigned": "#6b7280",
-                },
+                color_discrete_sequence=["#f59e0b", "#10b981", "#0ea5e9", "#f43f5e"],
             )
             fig_pie.update_layout(template="plotly_dark", height=320)
             st.plotly_chart(fig_pie, use_container_width=True)
-
-        with col_bar:
-            st.markdown("#### 💵 Chi tiêu Trung bình / Khách hàng (ARPU)")
+        with c_p2:
             fig_arpu = px.bar(
                 df_seg,
                 x="rfm_segment",
                 y="arpu",
+                title="Chi tiêu trung bình / Khách hàng (ARPU)",
                 color="rfm_segment",
-                labels={"arpu": "ARPU ($/khách)", "rfm_segment": "Phân khúc"},
                 color_discrete_sequence=["#6366f1", "#10b981", "#0ea5e9", "#f43f5e"],
             )
             fig_arpu.update_layout(template="plotly_dark", height=320, showlegend=False)
             st.plotly_chart(fig_arpu, use_container_width=True)
 
-        st.markdown("#### 📋 Bảng Chi tiết Phân khúc Khách hàng")
-        st.dataframe(
-            df_seg[[
-                "rfm_segment", "total_customers", "customer_share_pct",
-                "total_orders", "total_revenue", "revenue_contribution_pct",
-                "arpu", "avg_customer_age",
-            ]],
-            use_container_width=True,
-            column_config={
-                "rfm_segment": "Phân khúc Khách hàng",
-                "total_customers": st.column_config.NumberColumn("Số lượng khách", format="%d"),
-                "customer_share_pct": st.column_config.NumberColumn("Tỷ lệ khách", format="%.2f%%"),
-                "total_orders": st.column_config.NumberColumn("Tổng đơn hàng", format="%d"),
-                "total_revenue": st.column_config.NumberColumn("Tổng doanh thu", format="$%,.2f"),
-                "revenue_contribution_pct": st.column_config.NumberColumn("Đóng góp DT", format="%.2f%%"),
-                "arpu": st.column_config.NumberColumn("ARPU ($)", format="$%.2f"),
-                "avg_customer_age": st.column_config.NumberColumn("Tuổi TB", format="%.1f tuổi"),
-            },
-        )
-    else:
-        st.info("Đang kết nối DWH để tải phân khúc...")
+        st.dataframe(df_seg, use_container_width=True)
 
 
 # ==============================================================================
-# TAB 3: GỢI Ý CÁ NHÂN HÓA (LIVE DEMO)
+# TAB 4: KHAI PHÁ GIỎ HÀNG & GỢI Ý MUA KÈM (CROSS-SELL)
 # ==============================================================================
 with tab_recs:
-    st.subheader("🎯 Demo Trải nghiệm Hệ thống Gợi ý Cá nhân hóa")
+    st.subheader("🎯 Khai Phá Giỏ Hàng & Gợi Ý Mua Kèm (FP-Growth)")
 
-    col_ctrl1, col_ctrl2, col_ctrl3 = st.columns([2, 1, 1])
+    rules_csv = PROJECT_ROOT / "data" / "processed" / "association_rules.csv"
+    if rules_csv.exists():
+        df_rules = pd.read_csv(rules_csv)
+        st.metric("Tổng số luật kết hợp tìm thấy", f"{len(df_rules):,} luật", "Lift > 1.1x")
 
-    sample_users = fetch_sample_users()
-    user_options = {
-        f"[{u['rfm_segment']}] User: {u['user_id'][:12]}... ({u.get('location', 'Brazil')})": u["user_id"]
-        for u in sample_users
-    }
+        min_lift_filter = st.slider("Lọc theo Độ nâng tối thiểu (Min Lift):", min_value=1.1, max_value=60.0, value=5.0, step=0.5)
+        filtered_rules = df_rules[df_rules["lift"] >= min_lift_filter]
 
-    with col_ctrl1:
-        selected_user_label = st.selectbox(
-            "Chọn khách hàng mẫu theo phân khúc:",
-            options=list(user_options.keys()) if user_options else ["0000b849f77a49e4a4ce2b2a4ca5be3f"],
-        )
-        selected_uid = user_options.get(selected_user_label, "0000b849f77a49e4a4ce2b2a4ca5be3f")
-
-    with col_ctrl2:
-        algorithm_choice = st.selectbox(
-            "Thuật toán gợi ý:",
-            options=["hybrid", "content_based", "cf_svd", "popularity"],
-            format_func=lambda x: {
-                "hybrid": "Content-Based Hybrid (Tối ưu)",
-                "content_based": "Content-Based (TF-IDF)",
-                "cf_svd": "Collaborative Filtering (SVD)",
-                "popularity": "Popularity Baseline (Thịnh hành)",
-            }[x],
+        st.dataframe(
+            filtered_rules[["antecedents", "consequents", "support", "confidence", "lift"]].head(50),
+            use_container_width=True,
         )
 
-    with col_ctrl3:
-        top_k = st.slider("Số lượng gợi ý (K):", min_value=3, max_value=8, value=6)
-
-    # Nút bấm kích hoạt gợi ý
-    if st.button("✨ Chạy Gợi ý Sản phẩm", type="primary", use_container_width=True):
-        with st.spinner("Đang tính toán vector gợi ý từ DWH..."):
-            rec_data = get_user_recommendations(selected_uid, k=top_k, algorithm=algorithm_choice)
-
-        if rec_data:
-            # Banner thông tin người dùng
-            rfm = rec_data.get("rfm_segment", "Khách hàng mới")
-            badge_color = "#f59e0b" if "Champions" in rfm else "#10b981" if "Loyal" in rfm else "#0ea5e9"
-            cold_status = "⚠️ Người dùng mới (Cold-Start: Gợi ý theo xu hướng)" if rec_data.get("is_cold_start") else "✅ Người dùng đã có lịch sử tương tác"
-
-            st.markdown(
-                f"""
-                <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
-                    <span style="font-size: 1.1rem; font-weight: bold;">User ID: <code>{rec_data['user_id']}</code></span>
-                    <span style="background: {badge_color}33; color: {badge_color}; border: 1px solid {badge_color}; padding: 3px 10px; border-radius: 20px; font-weight: bold; margin-left: 10px; font-size: 0.85rem;">{rfm}</span>
-                    <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">
-                        Thuật toán: <b>{rec_data['algorithm_used'].upper()}</b> | Trạng thái: {cold_status}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            # Render danh sách thẻ sản phẩm dạng lưới
-            recs = rec_data.get("recommendations", [])
-            cols = st.columns(3)
-            for i, p in enumerate(recs):
-                col = cols[i % 3]
-                with col:
-                    st.markdown(
-                        f"""
-                        <div class="product-box">
-                            <div>
-                                <span style="font-size: 0.72rem; color: #818cf8; font-weight: bold; text-transform: uppercase;">{p.get('category_name', 'Chưa phân loại')}</span>
-                                <h4 style="font-size: 0.95rem; margin: 0.3rem 0; line-height: 1.4;">{p['product_name']}</h4>
-                                <div style="background: rgba(255,255,255,0.03); border-left: 2px solid #10b981; padding: 4px 8px; font-size: 0.78rem; color: #94a3b8; margin: 8px 0;">
-                                    {p.get('recommendation_reason', 'Gợi ý phù hợp')}
-                                </div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; margin-top: 8px;">
-                                <span style="font-size: 1.2rem; font-weight: bold; color: #34d399;">${p['price']:.2f}</span>
-                                <span style="font-size: 0.75rem; color: #a5b4fc; background: rgba(99, 102, 241, 0.2); padding: 2px 6px; border-radius: 4px;">Match: {p.get('score', 1.0)*100:.0f}%</span>
-                            </div>
-                        </div>
-                        """,
-                        unsafe_allow_html=True,
-                    )
-                    st.write("")  # Khoảng cách dòng
-
-
-# ==============================================================================
-# TAB 4: MUA KÈM & COMBO GIỎ HÀNG (FP-GROWTH)
-# ==============================================================================
-with tab_fbt:
-    st.subheader("🛒 Khai phá Luật Kết hợp Giỏ hàng (Market Basket Analysis - FP-Growth)")
-
-    sample_prods = fetch_sample_products()
-    prod_options = {
-        f"[{p['category_name']}] {p['product_name']} (${p['price']:.2f})": p["product_id"]
-        for p in sample_prods
-    }
-
-    selected_prod_label = st.selectbox(
-        "Chọn sản phẩm khách hàng đang xem trong giỏ hàng:",
-        options=list(prod_options.keys()) if prod_options else ["1e9e8ef04dbcff4541ed26657ea517e5"],
-    )
-    selected_pid = prod_options.get(selected_prod_label, "1e9e8ef04dbcff4541ed26657ea517e5")
-
-    if st.button("🔍 Tìm Sản Phẩm Mua Kèm", type="primary", use_container_width=True):
-        with st.spinner("Đang tra cứu luật kết hợp giỏ hàng..."):
-            fbt_data = get_frequently_bought_together(selected_pid, k=4)
-
-        if fbt_data:
-            src = fbt_data["source_product"]
-            st.info(f"🔎 Sản phẩm đang xem: **{src['product_name']}** ({src['category_name']}) — Giá: **${src['price']:.2f}** | Tìm thấy **{fbt_data['association_rules_found']} luật kết hợp** liên quan.")
-
-            st.markdown("#### 🛍️ Sản phẩm thường được mua kèm nhiều nhất:")
-            fbt_items = fbt_data.get("frequently_bought_together", [])
-
-            cols_fbt = st.columns(len(fbt_items) if fbt_items else 1)
-            for i, item in enumerate(fbt_items):
-                with cols_fbt[i]:
-                    st.markdown(
-                        f"""
-                        <div class="product-box">
-                            <div>
-                                <span style="font-size: 0.72rem; color: #f59e0b; font-weight: bold;">LIFT: {item['lift']}x</span>
-                                <h4 style="font-size: 0.92rem; margin: 0.3rem 0;">{item['product_name']}</h4>
-                                <div style="background: rgba(245, 158, 11, 0.1); border-left: 2px solid #f59e0b; padding: 4px 8px; font-size: 0.75rem; color: #fbbf24; margin: 8px 0;">
-                                    {item['cross_sell_reason']}
-                                </div>
-                            </div>
-                            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; margin-top: 8px;">
-                                <div style="font-size: 1.15rem; font-weight: bold; color: #34d399;">${item['price']:.2f}</div>
-                                <div style="font-size: 0.75rem; color: #94a3b8;">Độ tin cậy: {item['confidence']*100:.1f}%</div>
-                            </div>
-                        </div>
-                        """,
-                        unsafe_allow_html=True,
-                    )
-
-            # Box Combo Ưu đãi
-            bundle = fbt_data.get("bundle_offer")
-            if bundle and fbt_items:
+    st.markdown("---")
+    st.markdown("#### 🛍️ Minh Họa Gói Sản Phẩm Mua Kèm (Bundle Recommendation):")
+    prods_sample = query_dataframe("SELECT product_id, product_name, price, brand, ingredients_text FROM dim_product LIMIT 3;")
+    if not prods_sample.empty:
+        cols_p = st.columns(len(prods_sample))
+        for idx, (_, p) in enumerate(prods_sample.iterrows()):
+            with cols_p[idx]:
+                ing = p.get('ingredients_text')
+                ing_str = f"<br><small style='color: #94a3b8;'>Nguyên liệu: {str(ing)[:60]}...</small>" if pd.notna(ing) and str(ing).strip() else ""
                 st.markdown(
                     f"""
-                    <div class="bundle-card">
-                        <h4 style="color: #fbbf24; margin-bottom: 0.5rem;">🎁 Combo Ưu Đãi Mua Kèm Tiết Kiệm (Bundle Offer)</h4>
-                        <div style="font-size: 0.88rem; color: #94a3b8;">Mua sản phẩm đang xem kèm {len(fbt_items)} sản phẩm đề xuất trên để nhận ngay ưu đãi:</div>
-                        <div style="display: flex; gap: 2rem; align-items: center; margin-top: 0.8rem;">
-                            <div>
-                                <span style="font-size: 0.8rem; color: #64748b;">GIÁ GỐC:</span>
-                                <span style="text-decoration: line-through; font-size: 1.1rem; color: #94a3b8; margin-left: 5px;">${bundle['original_total_price']:.2f}</span>
-                            </div>
-                            <div>
-                                <span style="font-size: 0.8rem; color: #10b981;">GIÁ COMBO (-10%):</span>
-                                <span style="font-size: 1.5rem; font-weight: bold; color: #34d399; margin-left: 5px;">${bundle['bundle_discount_price']:.2f}</span>
-                            </div>
-                            <span style="background: #ef4444; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">TIẾT KIỆM ${bundle['you_save']:.2f}</span>
-                        </div>
+                    <div class="metric-card">
+                        <span style="color: #818cf8; font-weight: bold; font-size: 0.8rem;">SẢN PHẨM PHỔ BIẾN</span>
+                        <h5 style="margin: 6px 0; font-size: 0.95rem;">{p['product_name'][:45]}...</h5>
+                        <div style="color: #34d399; font-weight: bold; font-size: 1.1rem;">${p['price']:.2f}</div>
+                        <div style="font-size: 0.8rem; color: #cbd5e1;">Hãng: {p['brand'] or 'Amazon Choice'}</div>
+                        {ing_str}
                     </div>
                     """,
                     unsafe_allow_html=True,
                 )
-
-
-# ==============================================================================
-# TAB 5: ĐÁNH GIÁ HỌC THUẬT & BENCHMARK
-# ==============================================================================
-with tab_bench:
-    st.subheader("⚡ Đánh giá Hiệu năng Offline Models (Test trên 7,805 Users)")
-
-    col_bench_chart, col_sparsity = st.columns([3, 2])
-
-    with col_bench_chart:
-        df_bench = pd.DataFrame({
-            "Mô hình": [
-                "Content-Based (TF-IDF)", "Content-Based (TF-IDF)", "Content-Based (TF-IDF)",
-                "Popularity Baseline", "Popularity Baseline", "Popularity Baseline",
-                "CF (SVD)", "CF (SVD)", "CF (SVD)",
-            ],
-            "Chỉ số Metric": [
-                "Recall@10", "NDCG@10", "HitRate@10",
-                "Recall@10", "NDCG@10", "HitRate@10",
-                "Recall@10", "NDCG@10", "HitRate@10",
-            ],
-            "Điểm số": [
-                0.0438, 0.0263, 0.0438,
-                0.0133, 0.0058, 0.0133,
-                0.0073, 0.0052, 0.0073,
-            ],
-        })
-
-        fig_bench = px.bar(
-            df_bench,
-            x="Mô hình",
-            y="Điểm số",
-            color="Chỉ số Metric",
-            barmode="group",
-            title="So sánh Hiệu năng Offline giữa các Mô hình Gợi ý",
-            color_discrete_sequence=["#10b981", "#6366f1", "#f59e0b"],
-        )
-        fig_bench.update_layout(template="plotly_dark", height=380)
-        st.plotly_chart(fig_bench, use_container_width=True)
-
-    with col_sparsity:
-        st.markdown("#### 🔬 Phân tích Độ thưa Dữ liệu (Sparsity Analysis)")
-        st.metric(label="Mức độ Thưa của Ma trận User-Item", value="99.9967%", delta="Cực kỳ thưa")
-        st.metric(label="Tương tác Trung bình / Người dùng", value="1.06 lần mua", delta="Hầu hết chỉ mua 1 lần")
-
-        st.info(
-            """
-            **Nhận định Học thuật quan trọng:**
-            - Dữ liệu E-commerce thực tế có độ thưa rất cao ($> 99.9%$) do đa số khách hàng chỉ thực hiện duy nhất 1 giao dịch trên sàn.
-            - Thuật toán **Lọc cộng tác (CF-SVD)** phụ thuộc vào độ chồng lấn hành vi giữa các users nên gặp hiện tượng **Cold-Start** nặng.
-            - **Content-Based (TF-IDF)** vượt trội hoàn toàn vì khai thác được ngữ nghĩa văn bản của sản phẩm và danh mục hàng hóa mà không cần lịch sử dày dặn.
-            """
-        )

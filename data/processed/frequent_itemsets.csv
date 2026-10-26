@@ -1,63 +1,1033 @@
 support,itemsets,length
-0.33962264150943394,bed_bath_table,1
-0.22641509433962265,furniture_decor,1
-0.16981132075471697,housewares,1
-0.1320754716981132,baby,1
-0.1320754716981132,health_beauty,1
-0.11320754716981132,"bed_bath_table, furniture_decor",2
-0.09433962264150944,stationery,1
-0.09433962264150944,home_construction,1
-0.07547169811320754,unknown,1
-0.07547169811320754,home_confort,1
-0.07547169811320754,sports_leisure,1
-0.07547169811320754,computers_accessories,1
-0.07547169811320754,garden_tools,1
-0.07547169811320754,cool_stuff,1
-0.07547169811320754,"home_confort, bed_bath_table",2
-0.05660377358490566,"baby, bed_bath_table",2
-0.05660377358490566,"housewares, unknown",2
-0.05660377358490566,watches_gifts,1
-0.03773584905660377,construction_tools_lights,1
-0.03773584905660377,perfumery,1
-0.03773584905660377,"construction_tools_lights, furniture_decor",2
-0.03773584905660377,auto,1
-0.03773584905660377,"health_beauty, stationery",2
-0.03773584905660377,"watches_gifts, stationery",2
-0.03773584905660377,"furniture_decor, home_construction",2
-0.03773584905660377,"sports_leisure, health_beauty",2
-0.03773584905660377,"bed_bath_table, housewares",2
-0.03773584905660377,"baby, cool_stuff",2
-0.03773584905660377,luggage_accessories,1
-0.03773584905660377,toys,1
-0.03773584905660377,"perfumery, health_beauty",2
-0.018867924528301886,books_technical,1
-0.018867924528301886,office_furniture,1
-0.018867924528301886,musical_instruments,1
-0.018867924528301886,costruction_tools_garden,1
-0.018867924528301886,construction_tools_safety,1
-0.018867924528301886,fashion_shoes,1
-0.018867924528301886,fashion_bags_accessories,1
-0.018867924528301886,"baby, fashion_shoes",2
-0.018867924528301886,"cool_stuff, computers_accessories",2
-0.018867924528301886,"computers_accessories, luggage_accessories",2
-0.018867924528301886,"computers_accessories, home_construction",2
-0.018867924528301886,"cool_stuff, home_construction",2
-0.018867924528301886,"cool_stuff, housewares",2
-0.018867924528301886,"sports_leisure, unknown",2
-0.018867924528301886,"housewares, furniture_decor",2
-0.018867924528301886,"fashion_bags_accessories, bed_bath_table",2
-0.018867924528301886,"auto, computers_accessories",2
-0.018867924528301886,"auto, housewares",2
-0.018867924528301886,"garden_tools, luggage_accessories",2
-0.018867924528301886,"cool_stuff, computers_accessories, home_construction",3
-0.018867924528301886,"garden_tools, home_construction",2
-0.018867924528301886,"bed_bath_table, health_beauty",2
-0.018867924528301886,"housewares, stationery",2
-0.018867924528301886,"baby, garden_tools",2
-0.018867924528301886,"garden_tools, computers_accessories",2
-0.018867924528301886,"toys, watches_gifts",2
-0.018867924528301886,"home_construction, construction_tools_safety",2
-0.018867924528301886,"sports_leisure, toys",2
-0.018867924528301886,"books_technical, costruction_tools_garden",2
-0.018867924528301886,"office_furniture, bed_bath_table",2
-0.018867924528301886,"furniture_decor, musical_instruments",2
+0.16666666666666666,premium_beauty,1
+0.16666666666666666,"premium_beauty, all_beauty",2
+0.16666666666666666,all_beauty,1
+0.06666666666666667,Dior J'adore,1
+0.05,Dodge Hornet GT Plus,1
+0.05,iPhone 12 Silicone Case with MagSafe Plum,1
+0.05,Basketball Rim,1
+0.05,Rolex Datejust,1
+0.05,Gray Dress,1
+0.05,Rice,1
+0.05,Cat Food,1
+0.05,Apple Watch Series 4 Gold,1
+0.05,Knoll Saarinen Executive Conference Chair,1
+0.05,Powder Canister,1
+0.05,Blue Frock,1
+0.05,iPhone 13 Pro,1
+0.05,Sports Sneakers Off White Red,1
+0.05,Samsung Galaxy Tab White,1
+0.05,Rolex Datejust Women,1
+0.05,Puma Future Rider Trainers,1
+0.03333333333333333,Rolex Cellini Moonphase,1
+0.03333333333333333,Plate,1
+0.03333333333333333,Dog Food,1
+0.03333333333333333,Marni Red & Black Suit,1
+0.03333333333333333,Cucumber,1
+0.03333333333333333,Generic Motorcycle,1
+0.03333333333333333,Calvin Klein CK One,1
+0.03333333333333333,Vivo X21,1
+0.03333333333333333,Slotted Turner,1
+0.03333333333333333,Chanel Coco Noir Eau De,1
+0.03333333333333333,Apple,1
+0.03333333333333333,Samsung Galaxy S8,1
+0.03333333333333333,Rolex Submariner Watch,1
+0.03333333333333333,Black Sun Glasses,1
+0.03333333333333333,Tissue Paper Box,1
+0.03333333333333333,Green Bell Pepper,1
+0.03333333333333333,Egg Slicer,1
+0.03333333333333333,MotoGP CI.H1,1
+0.03333333333333333,Oppo K1,1
+0.03333333333333333,Selfie Lamp with iPhone,1
+0.03333333333333333,Sportbike Motorcycle,1
+0.03333333333333333,Man Short Sleeve Shirt,1
+0.03333333333333333,Potatoes,1
+0.03333333333333333,Cricket Ball,1
+0.03333333333333333,Hand Blender,1
+0.03333333333333333,Golf Ball,1
+0.03333333333333333,Cooking Oil,1
+0.03333333333333333,Yellow Peeler,1
+0.03333333333333333,Citrus Squeezer Yellow,1
+0.03333333333333333,Plant Pot,1
+0.03333333333333333,White Faux Leather Backpack,1
+0.03333333333333333,Electric Stove,1
+0.03333333333333333,iPhone 6,1
+0.03333333333333333,Baseball Ball,1
+0.016666666666666666,"Tropical Earring, Cricket Ball, Cat Food",3
+0.016666666666666666,"Tropical Earring, Cricket Ball, Wooden Bathroom Sink With Mirror, Selfie Stick Monopod",4
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Tropical Earring, Cat Food, Selfie Stick Monopod",4
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Tropical Earring, Cricket Ball, Cat Food",4
+0.016666666666666666,"Tropical Earring, Cricket Ball, Cat Food, Selfie Stick Monopod",4
+0.016666666666666666,"Selfie Stick Monopod, Cricket Ball, Wooden Bathroom Sink With Mirror, Tropical Earring, Cat Food",5
+0.016666666666666666,"Grater Black, Rolex Cellini Moonphase",2
+0.016666666666666666,"Grater Black, Dior J'adore",2
+0.016666666666666666,Vaseline Men Body and Face Lotion,1
+0.016666666666666666,Dolce Shine Eau de,1
+0.016666666666666666,Black Whisk,1
+0.016666666666666666,Annibale Colombo Bed,1
+0.016666666666666666,Essence Mascara Lash Princess,1
+0.016666666666666666,Apple AirPods Max Silver,1
+0.016666666666666666,Ice Cream,1
+0.016666666666666666,Eggs,1
+0.016666666666666666,Lunch Box,1
+0.016666666666666666,Pan,1
+0.016666666666666666,Family Tree Photo Frame,1
+0.016666666666666666,Apple MagSafe Battery Pack,1
+0.016666666666666666,Sports Sneakers Off White & Red,1
+0.016666666666666666,Green Chili Pepper,1
+0.016666666666666666,American Football,1
+0.016666666666666666,Watch Gold for Women,1
+0.016666666666666666,Silver Pot With Glass Cap,1
+0.016666666666666666,Nike Baseball Cleats,1
+0.016666666666666666,Protein Powder,1
+0.016666666666666666,Feather Shuttlecock,1
+0.016666666666666666,Asus Zenbook Pro Dual Screen Laptop,1
+0.016666666666666666,Tartan Dress,1
+0.016666666666666666,Vivo S1,1
+0.016666666666666666,Realme C35,1
+0.016666666666666666,Milk,1
+0.016666666666666666,Apple HomePod Mini Cosmic Grey,1
+0.016666666666666666,Volleyball,1
+0.016666666666666666,Kitchen Sieve,1
+0.016666666666666666,Lenovo Yoga 920,1
+0.016666666666666666,Green Crystal Earring,1
+0.016666666666666666,Knife,1
+0.016666666666666666,Black & Brown Slipper,1
+0.016666666666666666,Prada Women Bag,1
+0.016666666666666666,Bamboo Spatula,1
+0.016666666666666666,Apple Airpower Wireless Charger,1
+0.016666666666666666,Oppo F19 Pro Plus,1
+0.016666666666666666,Vivo V9,1
+0.016666666666666666,Cricket Bat,1
+0.016666666666666666,Durango SXT RWD,1
+0.016666666666666666,Golden Shoes Woman,1
+0.016666666666666666,Eyeshadow Palette with Mirror,1
+0.016666666666666666,Decoration Swing,1
+0.016666666666666666,Apple Airpods,1
+0.016666666666666666,Mug Tree Stand,1
+0.016666666666666666,Black Women's Gown,1
+0.016666666666666666,Rolex Cellini Date Black Dial,1
+0.016666666666666666,Baseball Glove,1
+0.016666666666666666,Corset With Black Skirt,1
+0.016666666666666666,Beef Steak,1
+0.016666666666666666,Nike Air Jordan 1 Red And Black,1
+0.016666666666666666,Bedside Table African Cherry,1
+0.016666666666666666,Spoon,1
+0.016666666666666666,Strawberry,1
+0.016666666666666666,Tray,1
+0.016666666666666666,Green and Black Glasses,1
+0.016666666666666666,Kiwi,1
+0.016666666666666666,Juice,1
+0.016666666666666666,Charger SXT RWD,1
+0.016666666666666666,iPhone 5s,1
+0.016666666666666666,Basketball,1
+0.016666666666666666,Selfie Stick Monopod,1
+0.016666666666666666,Wooden Bathroom Sink With Mirror,1
+0.016666666666666666,Tropical Earring,1
+0.016666666666666666,Grater Black,1
+0.016666666666666666,"Blue Frock, Cat Food",2
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Blue Frock",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Blue Frock",2
+0.016666666666666666,"Dior J'adore, Blue Frock",2
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Cat Food",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Dior J'adore, Blue Frock",3
+0.016666666666666666,"Blue Frock, Generic Motorcycle",2
+0.016666666666666666,"Rolex Datejust Women, Generic Motorcycle",2
+0.016666666666666666,"Rolex Datejust, Generic Motorcycle",2
+0.016666666666666666,"Rolex Datejust Women, Rolex Datejust, Generic Motorcycle",3
+0.016666666666666666,"Baseball Ball, Generic Motorcycle",2
+0.016666666666666666,"Baseball Ball, Blue Frock",2
+0.016666666666666666,"Powder Canister, Baseball Ball",2
+0.016666666666666666,"Baseball Ball, Blue Frock, Generic Motorcycle",3
+0.016666666666666666,"Baseball Ball, iPhone 6",2
+0.016666666666666666,"iPhone 6, Generic Motorcycle",2
+0.016666666666666666,"iPhone 6, Blue Frock",2
+0.016666666666666666,"iPhone 6, iPhone 12 Silicone Case with MagSafe Plum",2
+0.016666666666666666,"Baseball Ball, iPhone 6, Generic Motorcycle",3
+0.016666666666666666,"Blue Frock, iPhone 6, Generic Motorcycle",3
+0.016666666666666666,"Baseball Ball, iPhone 6, Blue Frock",3
+0.016666666666666666,"Baseball Ball, iPhone 6, Blue Frock, Generic Motorcycle",4
+0.016666666666666666,"iPhone 13 Pro, Man Short Sleeve Shirt",2
+0.016666666666666666,"Dior J'adore, Man Short Sleeve Shirt",2
+0.016666666666666666,"iPhone 13 Pro, Dior J'adore, Man Short Sleeve Shirt",3
+0.016666666666666666,"Man Short Sleeve Shirt, Apple iPhone Charger",2
+0.016666666666666666,"iPhone 13 Pro, Dior J'adore",2
+0.016666666666666666,"Party Glasses, Man Short Sleeve Shirt",2
+0.016666666666666666,"Party Glasses, iPhone 13 Pro",2
+0.016666666666666666,"Party Glasses, Dior J'adore",2
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Man Short Sleeve Shirt",3
+0.016666666666666666,"Party Glasses, Dior J'adore, Man Short Sleeve Shirt",3
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Dior J'adore",3
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Party Glasses",2
+0.016666666666666666,"Realme X, Man Short Sleeve Shirt",2
+0.016666666666666666,"Realme X, iPhone 13 Pro",2
+0.016666666666666666,"Realme X, Dior J'adore",2
+0.016666666666666666,"Realme X, Party Glasses, Man Short Sleeve Shirt",3
+0.016666666666666666,"Realme X, Party Glasses, iPhone 13 Pro",3
+0.016666666666666666,"Realme X, Party Glasses, Dior J'adore",3
+0.016666666666666666,"Realme X, iPhone 13 Pro, Man Short Sleeve Shirt",3
+0.016666666666666666,"Realme X, Dior J'adore, Man Short Sleeve Shirt",3
+0.016666666666666666,"Realme X, iPhone 13 Pro, Dior J'adore",3
+0.016666666666666666,"Realme X, Party Glasses, iPhone 13 Pro, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Party Glasses, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Party Glasses, iPhone 13 Pro, Dior J'adore",4
+0.016666666666666666,"Realme X, iPhone 13 Pro, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Dior J'adore, Man Short Sleeve Shirt, Realme X",5
+0.016666666666666666,"Realme X, Fish Steak",2
+0.016666666666666666,"Fish Steak, Party Glasses",2
+0.016666666666666666,"Fish Steak, Man Short Sleeve Shirt",2
+0.016666666666666666,"Fish Steak, iPhone 13 Pro",2
+0.016666666666666666,"Fish Steak, Dior J'adore",2
+0.016666666666666666,"Realme X, Party Glasses, Fish Steak",3
+0.016666666666666666,"Realme X, Fish Steak, Man Short Sleeve Shirt",3
+0.016666666666666666,"Realme X, Fish Steak, iPhone 13 Pro",3
+0.016666666666666666,"Realme X, Fish Steak, Dior J'adore",3
+0.016666666666666666,"Fish Steak, Party Glasses, Man Short Sleeve Shirt",3
+0.016666666666666666,"Fish Steak, Party Glasses, iPhone 13 Pro",3
+0.016666666666666666,"Fish Steak, Party Glasses, Dior J'adore",3
+0.016666666666666666,"Fish Steak, iPhone 13 Pro, Man Short Sleeve Shirt",3
+0.016666666666666666,"Fish Steak, Dior J'adore, Man Short Sleeve Shirt",3
+0.016666666666666666,"Fish Steak, iPhone 13 Pro, Dior J'adore",3
+0.016666666666666666,"Realme X, Party Glasses, Fish Steak, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Party Glasses, iPhone 13 Pro, Fish Steak",4
+0.016666666666666666,"Realme X, Party Glasses, Dior J'adore, Fish Steak",4
+0.016666666666666666,"Realme X, Fish Steak, iPhone 13 Pro, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Fish Steak, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Realme X, Fish Steak, iPhone 13 Pro, Dior J'adore",4
+0.016666666666666666,"Fish Steak, Party Glasses, iPhone 13 Pro, Man Short Sleeve Shirt",4
+0.016666666666666666,"Fish Steak, Party Glasses, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Fish Steak, Party Glasses, iPhone 13 Pro, Dior J'adore",4
+0.016666666666666666,"Fish Steak, iPhone 13 Pro, Dior J'adore, Man Short Sleeve Shirt",4
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Fish Steak, Man Short Sleeve Shirt, Realme X",5
+0.016666666666666666,"Party Glasses, Fish Steak, Dior J'adore, Man Short Sleeve Shirt, Realme X",5
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Fish Steak, Dior J'adore, Realme X",5
+0.016666666666666666,"iPhone 13 Pro, Fish Steak, Dior J'adore, Man Short Sleeve Shirt, Realme X",5
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Fish Steak, Dior J'adore, Man Short Sleeve Shirt",5
+0.016666666666666666,"Party Glasses, iPhone 13 Pro, Fish Steak, Dior J'adore, Man Short Sleeve Shirt, Realme X",6
+0.016666666666666666,"Dior J'adore, Sports Sneakers Off White Red",2
+0.016666666666666666,"Powder Canister, Samsung Galaxy Tab White",2
+0.016666666666666666,"Soft Drinks, Samsung Galaxy Tab White",2
+0.016666666666666666,"Powder Canister, Soft Drinks",2
+0.016666666666666666,"Powder Canister, Soft Drinks, Samsung Galaxy Tab White",3
+0.016666666666666666,"Rolex Datejust Women, Rolex Datejust",2
+0.016666666666666666,"Rolex Datejust Women, Realme XT",2
+0.016666666666666666,"Water, Realme XT",2
+0.016666666666666666,"Rolex Datejust Women, Water",2
+0.016666666666666666,"Rolex Datejust Women, Water, Realme XT",3
+0.016666666666666666,"Water, Classic Sun Glasses",2
+0.016666666666666666,"Realme XT, Classic Sun Glasses",2
+0.016666666666666666,"Rolex Datejust Women, Classic Sun Glasses",2
+0.016666666666666666,"Water, Realme XT, Classic Sun Glasses",3
+0.016666666666666666,"Rolex Datejust Women, Water, Classic Sun Glasses",3
+0.016666666666666666,"Rolex Datejust Women, Realme XT, Classic Sun Glasses",3
+0.016666666666666666,"Rolex Datejust Women, Water, Realme XT, Classic Sun Glasses",4
+0.016666666666666666,"Electric Stove, Puma Future Rider Trainers",2
+0.016666666666666666,"Electric Stove, Dog Food",2
+0.016666666666666666,"Plate, Electric Stove",2
+0.016666666666666666,"Electric Stove, Rolex Datejust",2
+0.016666666666666666,"Plate, Electric Stove, Dog Food",3
+0.016666666666666666,"Plate, Electric Stove, Rolex Datejust",3
+0.016666666666666666,"Electric Stove, Rolex Datejust, Dog Food",3
+0.016666666666666666,"Plate, Electric Stove, Rolex Datejust, Dog Food",4
+0.016666666666666666,"Electric Stove, Vivo X21",2
+0.016666666666666666,"Vivo X21, Puma Future Rider Trainers",2
+0.016666666666666666,"Vivo X21, Black Sun Glasses",2
+0.016666666666666666,"Electric Stove, Vivo X21, Puma Future Rider Trainers",3
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Vivo X21",2
+0.016666666666666666,"Electric Stove, Vaseline Men Body and Face Lotion",2
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Puma Future Rider Trainers",2
+0.016666666666666666,"Electric Stove, Vivo X21, Vaseline Men Body and Face Lotion",3
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Vivo X21, Puma Future Rider Trainers",3
+0.016666666666666666,"Electric Stove, Puma Future Rider Trainers, Vaseline Men Body and Face Lotion",3
+0.016666666666666666,"Electric Stove, Vivo X21, Puma Future Rider Trainers, Vaseline Men Body and Face Lotion",4
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Dolce Shine Eau de",2
+0.016666666666666666,"Dolce Shine Eau de, Vivo X21",2
+0.016666666666666666,"Electric Stove, Dolce Shine Eau de",2
+0.016666666666666666,"Dolce Shine Eau de, Puma Future Rider Trainers",2
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Vivo X21, Dolce Shine Eau de",3
+0.016666666666666666,"Electric Stove, Dolce Shine Eau de, Vaseline Men Body and Face Lotion",3
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Puma Future Rider Trainers, Dolce Shine Eau de",3
+0.016666666666666666,"Electric Stove, Vivo X21, Dolce Shine Eau de",3
+0.016666666666666666,"Dolce Shine Eau de, Vivo X21, Puma Future Rider Trainers",3
+0.016666666666666666,"Electric Stove, Puma Future Rider Trainers, Dolce Shine Eau de",3
+0.016666666666666666,"Electric Stove, Vivo X21, Dolce Shine Eau de, Vaseline Men Body and Face Lotion",4
+0.016666666666666666,"Vaseline Men Body and Face Lotion, Vivo X21, Puma Future Rider Trainers, Dolce Shine Eau de",4
+0.016666666666666666,"Electric Stove, Puma Future Rider Trainers, Dolce Shine Eau de, Vaseline Men Body and Face Lotion",4
+0.016666666666666666,"Electric Stove, Vivo X21, Puma Future Rider Trainers, Dolce Shine Eau de",4
+0.016666666666666666,"Dolce Shine Eau de, Vivo X21, Vaseline Men Body and Face Lotion, Puma Future Rider Trainers, Electric Stove",5
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Cat Food",2
+0.016666666666666666,"Blue Frock, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Cat Food, Apple Watch Series 4 Gold",2
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Blue Frock, Cat Food, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Cat Food, iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Blue Frock, Cat Food, iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Apple Watch Series 4 Gold, Black Whisk",2
+0.016666666666666666,"Blue Frock, Black Whisk",2
+0.016666666666666666,"Cat Food, Black Whisk",2
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Black Whisk",2
+0.016666666666666666,"Blue Frock, Apple Watch Series 4 Gold, Black Whisk",3
+0.016666666666666666,"Cat Food, Apple Watch Series 4 Gold, Black Whisk",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold, Black Whisk",3
+0.016666666666666666,"Blue Frock, Cat Food, Black Whisk",3
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Black Whisk",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Cat Food, Black Whisk",3
+0.016666666666666666,"Blue Frock, Cat Food, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"Cat Food, iPhone 12 Silicone Case with MagSafe Plum, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Cat Food, Black Whisk",4
+0.016666666666666666,"Apple Watch Series 4 Gold, Blue Frock, Black Whisk, iPhone 12 Silicone Case with MagSafe Plum, Cat Food",5
+0.016666666666666666,"Annibale Colombo Bed, Black Whisk",2
+0.016666666666666666,"Annibale Colombo Bed, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Annibale Colombo Bed, Blue Frock",2
+0.016666666666666666,"Annibale Colombo Bed, Cat Food",2
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed",2
+0.016666666666666666,"Annibale Colombo Bed, Apple Watch Series 4 Gold, Black Whisk",3
+0.016666666666666666,"Blue Frock, Annibale Colombo Bed, Black Whisk",3
+0.016666666666666666,"Annibale Colombo Bed, Cat Food, Black Whisk",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Black Whisk",3
+0.016666666666666666,"Blue Frock, Annibale Colombo Bed, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Cat Food, Annibale Colombo Bed, Apple Watch Series 4 Gold",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Blue Frock, Annibale Colombo Bed, Cat Food",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Blue Frock",3
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",3
+0.016666666666666666,"Blue Frock, Annibale Colombo Bed, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"Cat Food, Annibale Colombo Bed, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Apple Watch Series 4 Gold, Black Whisk",4
+0.016666666666666666,"Blue Frock, Annibale Colombo Bed, Cat Food, Black Whisk",4
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Black Whisk",4
+0.016666666666666666,"iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food, Black Whisk",4
+0.016666666666666666,"Blue Frock, Cat Food, Annibale Colombo Bed, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Cat Food, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",4
+0.016666666666666666,"Apple Watch Series 4 Gold, Blue Frock, Black Whisk, Annibale Colombo Bed, Cat Food",5
+0.016666666666666666,"Blue Frock, Black Whisk, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Apple Watch Series 4 Gold",5
+0.016666666666666666,"Apple Watch Series 4 Gold, Black Whisk, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",5
+0.016666666666666666,"Blue Frock, Black Whisk, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",5
+0.016666666666666666,"Apple Watch Series 4 Gold, Blue Frock, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",5
+0.016666666666666666,"Apple Watch Series 4 Gold, Blue Frock, Black Whisk, iPhone 12 Silicone Case with MagSafe Plum, Annibale Colombo Bed, Cat Food",6
+0.016666666666666666,"Samsung Galaxy S8, Puma Future Rider Trainers",2
+0.016666666666666666,"Samsung Galaxy S8, Rolex Submariner Watch",2
+0.016666666666666666,"Puma Future Rider Trainers, Rolex Submariner Watch",2
+0.016666666666666666,"Rolex Submariner Watch, Blue Frock",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",2
+0.016666666666666666,"Rolex Submariner Watch, Dior J'adore",2
+0.016666666666666666,"Samsung Galaxy S8, Puma Future Rider Trainers, Rolex Submariner Watch",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Blue Frock",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Dior J'adore",3
+0.016666666666666666,"Rolex Submariner Watch, Dior J'adore, Blue Frock",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Essence Mascara Lash Princess, Rolex Submariner Watch",2
+0.016666666666666666,"Essence Mascara Lash Princess, Samsung Galaxy S8",2
+0.016666666666666666,"Essence Mascara Lash Princess, Puma Future Rider Trainers",2
+0.016666666666666666,"Essence Mascara Lash Princess, Samsung Galaxy S8, Rolex Submariner Watch",3
+0.016666666666666666,"Essence Mascara Lash Princess, Puma Future Rider Trainers, Rolex Submariner Watch",3
+0.016666666666666666,"Essence Mascara Lash Princess, Samsung Galaxy S8, Puma Future Rider Trainers",3
+0.016666666666666666,"Essence Mascara Lash Princess, Samsung Galaxy S8, Puma Future Rider Trainers, Rolex Submariner Watch",4
+0.016666666666666666,"Tissue Paper Box, iPhone 12 Silicone Case with MagSafe Plum",2
+0.016666666666666666,"Tissue Paper Box, Basketball Rim",2
+0.016666666666666666,"Green Bell Pepper, Samsung Galaxy Tab White",2
+0.016666666666666666,"Green Bell Pepper, iPhone 13 Pro",2
+0.016666666666666666,"Egg Slicer, Green Bell Pepper",2
+0.016666666666666666,"Egg Slicer, Samsung Galaxy Tab White",2
+0.016666666666666666,"Egg Slicer, Marni Red & Black Suit",2
+0.016666666666666666,"Plate, Egg Slicer",2
+0.016666666666666666,"Egg Slicer, Rice",2
+0.016666666666666666,"Egg Slicer, Green Bell Pepper, Samsung Galaxy Tab White",3
+0.016666666666666666,"Plate, Egg Slicer, Marni Red & Black Suit",3
+0.016666666666666666,"Plate, Egg Slicer, Rice",3
+0.016666666666666666,"Egg Slicer, Marni Red & Black Suit, Rice",3
+0.016666666666666666,"Plate, Egg Slicer, Marni Red & Black Suit, Rice",4
+0.016666666666666666,"Egg Slicer, MotoGP CI.H1",2
+0.016666666666666666,"MotoGP CI.H1, Green Bell Pepper",2
+0.016666666666666666,"MotoGP CI.H1, Samsung Galaxy Tab White",2
+0.016666666666666666,"MotoGP CI.H1, Cricket Ball",2
+0.016666666666666666,"MotoGP CI.H1, Dog Food",2
+0.016666666666666666,"MotoGP CI.H1, Samsung Galaxy S8",2
+0.016666666666666666,"MotoGP CI.H1, Egg Slicer, Green Bell Pepper",3
+0.016666666666666666,"MotoGP CI.H1, Green Bell Pepper, Samsung Galaxy Tab White",3
+0.016666666666666666,"Egg Slicer, MotoGP CI.H1, Samsung Galaxy Tab White",3
+0.016666666666666666,"MotoGP CI.H1, Egg Slicer, Green Bell Pepper, Samsung Galaxy Tab White",4
+0.016666666666666666,"MotoGP CI.H1, Cricket Ball, Dog Food",3
+0.016666666666666666,"MotoGP CI.H1, Samsung Galaxy S8, Dog Food",3
+0.016666666666666666,"Cricket Ball, MotoGP CI.H1, Samsung Galaxy S8",3
+0.016666666666666666,"Cricket Ball, MotoGP CI.H1, Samsung Galaxy S8, Dog Food",4
+0.016666666666666666,"MotoGP CI.H1, Apple AirPods Max Silver",2
+0.016666666666666666,"Egg Slicer, Apple AirPods Max Silver",2
+0.016666666666666666,"Apple AirPods Max Silver, Green Bell Pepper",2
+0.016666666666666666,"Apple AirPods Max Silver, Samsung Galaxy Tab White",2
+0.016666666666666666,"MotoGP CI.H1, Egg Slicer, Apple AirPods Max Silver",3
+0.016666666666666666,"MotoGP CI.H1, Green Bell Pepper, Apple AirPods Max Silver",3
+0.016666666666666666,"MotoGP CI.H1, Apple AirPods Max Silver, Samsung Galaxy Tab White",3
+0.016666666666666666,"Egg Slicer, Apple AirPods Max Silver, Green Bell Pepper",3
+0.016666666666666666,"Egg Slicer, Apple AirPods Max Silver, Samsung Galaxy Tab White",3
+0.016666666666666666,"Apple AirPods Max Silver, Green Bell Pepper, Samsung Galaxy Tab White",3
+0.016666666666666666,"MotoGP CI.H1, Egg Slicer, Green Bell Pepper, Apple AirPods Max Silver",4
+0.016666666666666666,"MotoGP CI.H1, Egg Slicer, Apple AirPods Max Silver, Samsung Galaxy Tab White",4
+0.016666666666666666,"MotoGP CI.H1, Green Bell Pepper, Samsung Galaxy Tab White, Apple AirPods Max Silver",4
+0.016666666666666666,"Egg Slicer, Apple AirPods Max Silver, Green Bell Pepper, Samsung Galaxy Tab White",4
+0.016666666666666666,"MotoGP CI.H1, Apple AirPods Max Silver, Green Bell Pepper, Egg Slicer, Samsung Galaxy Tab White",5
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Dior J'adore",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rice",2
+0.016666666666666666,"Sportbike Motorcycle, Rolex Submariner Watch",2
+0.016666666666666666,"Sportbike Motorcycle, Blue Frock",2
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair",2
+0.016666666666666666,"Sportbike Motorcycle, Dior J'adore",2
+0.016666666666666666,"Sportbike Motorcycle, Rolex Submariner Watch, Blue Frock",3
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",3
+0.016666666666666666,"Sportbike Motorcycle, Rolex Submariner Watch, Dior J'adore",3
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Blue Frock",3
+0.016666666666666666,"Sportbike Motorcycle, Dior J'adore, Blue Frock",3
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Dior J'adore",3
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Blue Frock",4
+0.016666666666666666,"Sportbike Motorcycle, Rolex Submariner Watch, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Sportbike Motorcycle, Rolex Submariner Watch, Knoll Saarinen Executive Conference Chair, Dior J'adore",4
+0.016666666666666666,"Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Sportbike Motorcycle, Blue Frock, Dior J'adore, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",5
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle",2
+0.016666666666666666,"Ice Cream, Rolex Submariner Watch",2
+0.016666666666666666,"Ice Cream, Blue Frock",2
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair",2
+0.016666666666666666,"Ice Cream, Dior J'adore",2
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Rolex Submariner Watch",3
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Blue Frock",3
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair",3
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Dior J'adore",3
+0.016666666666666666,"Ice Cream, Rolex Submariner Watch, Blue Frock",3
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",3
+0.016666666666666666,"Ice Cream, Rolex Submariner Watch, Dior J'adore",3
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Blue Frock",3
+0.016666666666666666,"Ice Cream, Dior J'adore, Blue Frock",3
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Dior J'adore",3
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Rolex Submariner Watch, Blue Frock",4
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",4
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Rolex Submariner Watch, Dior J'adore",4
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Blue Frock",4
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Ice Cream, Sportbike Motorcycle, Knoll Saarinen Executive Conference Chair, Dior J'adore",4
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Blue Frock",4
+0.016666666666666666,"Ice Cream, Rolex Submariner Watch, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch, Dior J'adore",4
+0.016666666666666666,"Ice Cream, Knoll Saarinen Executive Conference Chair, Dior J'adore, Blue Frock",4
+0.016666666666666666,"Sportbike Motorcycle, Ice Cream, Blue Frock, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",5
+0.016666666666666666,"Sportbike Motorcycle, Ice Cream, Blue Frock, Dior J'adore, Rolex Submariner Watch",5
+0.016666666666666666,"Sportbike Motorcycle, Ice Cream, Dior J'adore, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",5
+0.016666666666666666,"Sportbike Motorcycle, Ice Cream, Blue Frock, Dior J'adore, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"Ice Cream, Blue Frock, Dior J'adore, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",5
+0.016666666666666666,"Sportbike Motorcycle, Ice Cream, Blue Frock, Dior J'adore, Knoll Saarinen Executive Conference Chair, Rolex Submariner Watch",6
+0.016666666666666666,"Apple Watch Series 4 Gold, Potatoes",2
+0.016666666666666666,"Eggs, Potatoes",2
+0.016666666666666666,"Lunch Box, Pan",2
+0.016666666666666666,"Pan, Family Tree Photo Frame",2
+0.016666666666666666,"Lunch Box, Family Tree Photo Frame",2
+0.016666666666666666,"Lunch Box, Family Tree Photo Frame, Pan",3
+0.016666666666666666,"Hand Blender, Basketball Rim",2
+0.016666666666666666,"Hand Blender, Puma Future Rider Trainers",2
+0.016666666666666666,"Hand Blender, Apple MagSafe Battery Pack",2
+0.016666666666666666,"Basketball Rim, Apple MagSafe Battery Pack",2
+0.016666666666666666,"Hand Blender, Basketball Rim, Apple MagSafe Battery Pack",3
+0.016666666666666666,"Cooking Oil, Generic Motorcycle",2
+0.016666666666666666,"Rolex Datejust Women, Cooking Oil",2
+0.016666666666666666,"Cooking Oil, Rolex Datejust",2
+0.016666666666666666,"Rolex Datejust Women, Cooking Oil, Generic Motorcycle",3
+0.016666666666666666,"Cooking Oil, Rolex Datejust, Generic Motorcycle",3
+0.016666666666666666,"Rolex Datejust Women, Cooking Oil, Rolex Datejust",3
+0.016666666666666666,"Rolex Datejust Women, Cooking Oil, Rolex Datejust, Generic Motorcycle",4
+0.016666666666666666,"Cooking Oil, Sports Sneakers Off White & Red",2
+0.016666666666666666,"Green Bell Pepper, Green Chili Pepper",2
+0.016666666666666666,"Green Chili Pepper, iPhone 13 Pro",2
+0.016666666666666666,"Green Chili Pepper, Green Bell Pepper, iPhone 13 Pro",3
+0.016666666666666666,"American Football, Green Chili Pepper",2
+0.016666666666666666,"American Football, Green Bell Pepper",2
+0.016666666666666666,"American Football, iPhone 13 Pro",2
+0.016666666666666666,"American Football, Green Chili Pepper, Green Bell Pepper",3
+0.016666666666666666,"Green Chili Pepper, American Football, iPhone 13 Pro",3
+0.016666666666666666,"American Football, iPhone 13 Pro, Green Bell Pepper",3
+0.016666666666666666,"Green Chili Pepper, American Football, iPhone 13 Pro, Green Bell Pepper",4
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Dodge Hornet GT Plus",2
+0.016666666666666666,"Rice, Dodge Hornet GT Plus",2
+0.016666666666666666,"Gray Dress, Dodge Hornet GT Plus",2
+0.016666666666666666,"Dodge Hornet GT Plus, Sports Sneakers Off White Red",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rice, Dodge Hornet GT Plus",3
+0.016666666666666666,"Gray Dress, Dodge Hornet GT Plus, Sports Sneakers Off White Red",3
+0.016666666666666666,"Dodge Hornet GT Plus, Watch Gold for Women",2
+0.016666666666666666,"Rolex Datejust, Rice",2
+0.016666666666666666,"Plate, Rolex Datejust",2
+0.016666666666666666,"Plate, Rice",2
+0.016666666666666666,"Plate, Dog Food",2
+0.016666666666666666,"Rolex Datejust, Dog Food",2
+0.016666666666666666,"Samsung Galaxy S8, Dog Food",2
+0.016666666666666666,"Plate, Rolex Datejust, Dog Food",3
+0.016666666666666666,"Electric Stove, Silver Pot With Glass Cap",2
+0.016666666666666666,"Dog Food, Silver Pot With Glass Cap",2
+0.016666666666666666,"Plate, Silver Pot With Glass Cap",2
+0.016666666666666666,"Rolex Datejust, Silver Pot With Glass Cap",2
+0.016666666666666666,"Electric Stove, Dog Food, Silver Pot With Glass Cap",3
+0.016666666666666666,"Plate, Electric Stove, Silver Pot With Glass Cap",3
+0.016666666666666666,"Electric Stove, Rolex Datejust, Silver Pot With Glass Cap",3
+0.016666666666666666,"Plate, Dog Food, Silver Pot With Glass Cap",3
+0.016666666666666666,"Rolex Datejust, Dog Food, Silver Pot With Glass Cap",3
+0.016666666666666666,"Plate, Rolex Datejust, Silver Pot With Glass Cap",3
+0.016666666666666666,"Plate, Electric Stove, Dog Food, Silver Pot With Glass Cap",4
+0.016666666666666666,"Electric Stove, Rolex Datejust, Dog Food, Silver Pot With Glass Cap",4
+0.016666666666666666,"Plate, Electric Stove, Rolex Datejust, Silver Pot With Glass Cap",4
+0.016666666666666666,"Plate, Rolex Datejust, Dog Food, Silver Pot With Glass Cap",4
+0.016666666666666666,"Plate, Rolex Datejust, Silver Pot With Glass Cap, Electric Stove, Dog Food",5
+0.016666666666666666,"iPhone 13 Pro, Nike Baseball Cleats",2
+0.016666666666666666,"Protein Powder, Nike Baseball Cleats",2
+0.016666666666666666,"iPhone 13 Pro, Protein Powder",2
+0.016666666666666666,"iPhone 13 Pro, Protein Powder, Nike Baseball Cleats",3
+0.016666666666666666,"Feather Shuttlecock, Protein Powder",2
+0.016666666666666666,"Feather Shuttlecock, Nike Baseball Cleats",2
+0.016666666666666666,"iPhone 13 Pro, Feather Shuttlecock",2
+0.016666666666666666,"Feather Shuttlecock, Protein Powder, Nike Baseball Cleats",3
+0.016666666666666666,"Feather Shuttlecock, iPhone 13 Pro, Protein Powder",3
+0.016666666666666666,"iPhone 13 Pro, Feather Shuttlecock, Nike Baseball Cleats",3
+0.016666666666666666,"Feather Shuttlecock, iPhone 13 Pro, Protein Powder, Nike Baseball Cleats",4
+0.016666666666666666,"Rolex Datejust Women, Gray Dress",2
+0.016666666666666666,"Gray Dress, Sports Sneakers Off White Red",2
+0.016666666666666666,"Asus Zenbook Pro Dual Screen Laptop, Gray Dress",2
+0.016666666666666666,"Rolex Datejust Women, Asus Zenbook Pro Dual Screen Laptop",2
+0.016666666666666666,"Rolex Datejust Women, Asus Zenbook Pro Dual Screen Laptop, Gray Dress",3
+0.016666666666666666,"Apple, Sports Sneakers Off White Red",2
+0.016666666666666666,"Apple, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Tartan Dress, Apple",2
+0.016666666666666666,"Tartan Dress, Sports Sneakers Off White Red",2
+0.016666666666666666,"Tartan Dress, Apple, Sports Sneakers Off White Red",3
+0.016666666666666666,"Oppo K1, Dodge Hornet GT Plus",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1",2
+0.016666666666666666,"Oppo K1, Rice",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, Dodge Hornet GT Plus",3
+0.016666666666666666,"Rice, Oppo K1, Dodge Hornet GT Plus",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, Rice",3
+0.016666666666666666,"Rice, Oppo K1, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",4
+0.016666666666666666,"Vivo S1, Oppo K1",2
+0.016666666666666666,"Sportbike Motorcycle, Realme C35",2
+0.016666666666666666,"Selfie Lamp with iPhone, Potatoes",2
+0.016666666666666666,"Selfie Lamp with iPhone, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Selfie Lamp with iPhone, Samsung Galaxy Tab White",2
+0.016666666666666666,"Selfie Lamp with iPhone, Apple Watch Series 4 Gold, Potatoes",3
+0.016666666666666666,"Selfie Lamp with iPhone, Milk",2
+0.016666666666666666,"Potatoes, Milk",2
+0.016666666666666666,"Apple Watch Series 4 Gold, Milk",2
+0.016666666666666666,"Selfie Lamp with iPhone, Potatoes, Milk",3
+0.016666666666666666,"Selfie Lamp with iPhone, Apple Watch Series 4 Gold, Milk",3
+0.016666666666666666,"Potatoes, Apple Watch Series 4 Gold, Milk",3
+0.016666666666666666,"Selfie Lamp with iPhone, Potatoes, Apple Watch Series 4 Gold, Milk",4
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Milk",2
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey",2
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Potatoes",2
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey, Milk",3
+0.016666666666666666,"Potatoes, Apple HomePod Mini Cosmic Grey, Milk",3
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold, Milk",3
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey, Potatoes",3
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold, Potatoes",3
+0.016666666666666666,"Selfie Lamp with iPhone, Potatoes, Apple HomePod Mini Cosmic Grey, Milk",4
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold, Milk",4
+0.016666666666666666,"Potatoes, Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold, Milk",4
+0.016666666666666666,"Selfie Lamp with iPhone, Apple HomePod Mini Cosmic Grey, Apple Watch Series 4 Gold, Potatoes",4
+0.016666666666666666,"Apple HomePod Mini Cosmic Grey, Milk, Selfie Lamp with iPhone, Potatoes, Apple Watch Series 4 Gold",5
+0.016666666666666666,"Volleyball, iPhone 6",2
+0.016666666666666666,"Volleyball, iPhone 12 Silicone Case with MagSafe Plum",2
+0.016666666666666666,"Volleyball, iPhone 12 Silicone Case with MagSafe Plum, iPhone 6",3
+0.016666666666666666,"Volleyball, Kitchen Sieve",2
+0.016666666666666666,"iPhone 6, Kitchen Sieve",2
+0.016666666666666666,"Kitchen Sieve, iPhone 12 Silicone Case with MagSafe Plum",2
+0.016666666666666666,"Volleyball, Kitchen Sieve, iPhone 6",3
+0.016666666666666666,"Volleyball, Kitchen Sieve, iPhone 12 Silicone Case with MagSafe Plum",3
+0.016666666666666666,"iPhone 6, Kitchen Sieve, iPhone 12 Silicone Case with MagSafe Plum",3
+0.016666666666666666,"Volleyball, Kitchen Sieve, iPhone 12 Silicone Case with MagSafe Plum, iPhone 6",4
+0.016666666666666666,"Plant Pot, Dodge Hornet GT Plus",2
+0.016666666666666666,"Plant Pot, Gray Dress",2
+0.016666666666666666,"Plant Pot, Sports Sneakers Off White Red",2
+0.016666666666666666,"Plant Pot, Gray Dress, Dodge Hornet GT Plus",3
+0.016666666666666666,"Plant Pot, Dodge Hornet GT Plus, Sports Sneakers Off White Red",3
+0.016666666666666666,"Plant Pot, Gray Dress, Sports Sneakers Off White Red",3
+0.016666666666666666,"Plant Pot, Gray Dress, Dodge Hornet GT Plus, Sports Sneakers Off White Red",4
+0.016666666666666666,"Plant Pot, White Faux Leather Backpack",2
+0.016666666666666666,"Oppo K1, White Faux Leather Backpack",2
+0.016666666666666666,"White Faux Leather Backpack, Dodge Hornet GT Plus",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack",2
+0.016666666666666666,"White Faux Leather Backpack, Rice",2
+0.016666666666666666,"Oppo K1, Dodge Hornet GT Plus, White Faux Leather Backpack",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Dodge Hornet GT Plus",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, White Faux Leather Backpack",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, Dodge Hornet GT Plus, White Faux Leather Backpack",4
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Rice",3
+0.016666666666666666,"Rice, White Faux Leather Backpack, Dodge Hornet GT Plus",3
+0.016666666666666666,"Oppo K1, Rice, White Faux Leather Backpack",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Dodge Hornet GT Plus, Rice",4
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, Rice, White Faux Leather Backpack",4
+0.016666666666666666,"Rice, Oppo K1, Dodge Hornet GT Plus, White Faux Leather Backpack",4
+0.016666666666666666,"Rice, White Faux Leather Backpack, Oppo K1, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920",2
+0.016666666666666666,"Plant Pot, Lenovo Yoga 920",2
+0.016666666666666666,"Plant Pot, White Faux Leather Backpack, Lenovo Yoga 920",3
+0.016666666666666666,"Green Crystal Earring, Lenovo Yoga 920",2
+0.016666666666666666,"Green Crystal Earring, White Faux Leather Backpack",2
+0.016666666666666666,"Plant Pot, Green Crystal Earring",2
+0.016666666666666666,"Green Crystal Earring, White Faux Leather Backpack, Lenovo Yoga 920",3
+0.016666666666666666,"Plant Pot, Green Crystal Earring, Lenovo Yoga 920",3
+0.016666666666666666,"Plant Pot, Green Crystal Earring, White Faux Leather Backpack",3
+0.016666666666666666,"Plant Pot, Green Crystal Earring, White Faux Leather Backpack, Lenovo Yoga 920",4
+0.016666666666666666,"Green Crystal Earring, Knife",2
+0.016666666666666666,"Knife, Lenovo Yoga 920",2
+0.016666666666666666,"White Faux Leather Backpack, Knife",2
+0.016666666666666666,"Plant Pot, Knife",2
+0.016666666666666666,"Green Crystal Earring, Knife, Lenovo Yoga 920",3
+0.016666666666666666,"Green Crystal Earring, White Faux Leather Backpack, Knife",3
+0.016666666666666666,"Plant Pot, Green Crystal Earring, Knife",3
+0.016666666666666666,"White Faux Leather Backpack, Knife, Lenovo Yoga 920",3
+0.016666666666666666,"Plant Pot, Knife, Lenovo Yoga 920",3
+0.016666666666666666,"Plant Pot, White Faux Leather Backpack, Knife",3
+0.016666666666666666,"Green Crystal Earring, White Faux Leather Backpack, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"Plant Pot, Green Crystal Earring, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"Plant Pot, Green Crystal Earring, White Faux Leather Backpack, Knife",4
+0.016666666666666666,"Plant Pot, White Faux Leather Backpack, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920, Plant Pot, Green Crystal Earring, Knife",5
+0.016666666666666666,"Black & Brown Slipper, Knife",2
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring",2
+0.016666666666666666,"Black & Brown Slipper, Lenovo Yoga 920",2
+0.016666666666666666,"Black & Brown Slipper, White Faux Leather Backpack",2
+0.016666666666666666,"Black & Brown Slipper, Plant Pot",2
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, Knife",3
+0.016666666666666666,"Black & Brown Slipper, Knife, Lenovo Yoga 920",3
+0.016666666666666666,"Black & Brown Slipper, White Faux Leather Backpack, Knife",3
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Knife",3
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, Lenovo Yoga 920",3
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, White Faux Leather Backpack",3
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Green Crystal Earring",3
+0.016666666666666666,"Black & Brown Slipper, White Faux Leather Backpack, Lenovo Yoga 920",3
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Lenovo Yoga 920",3
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, White Faux Leather Backpack",3
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, White Faux Leather Backpack, Knife",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Green Crystal Earring, Knife",4
+0.016666666666666666,"Black & Brown Slipper, White Faux Leather Backpack, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Knife, Lenovo Yoga 920",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, White Faux Leather Backpack, Knife",4
+0.016666666666666666,"Black & Brown Slipper, Green Crystal Earring, White Faux Leather Backpack, Lenovo Yoga 920",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Green Crystal Earring, Lenovo Yoga 920",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, Green Crystal Earring, White Faux Leather Backpack",4
+0.016666666666666666,"Black & Brown Slipper, Plant Pot, White Faux Leather Backpack, Lenovo Yoga 920",4
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920, Black & Brown Slipper, Green Crystal Earring, Knife",5
+0.016666666666666666,"Lenovo Yoga 920, Black & Brown Slipper, Plant Pot, Green Crystal Earring, Knife",5
+0.016666666666666666,"White Faux Leather Backpack, Black & Brown Slipper, Plant Pot, Green Crystal Earring, Knife",5
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920, Black & Brown Slipper, Plant Pot, Knife",5
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920, Black & Brown Slipper, Plant Pot, Green Crystal Earring",5
+0.016666666666666666,"White Faux Leather Backpack, Lenovo Yoga 920, Black & Brown Slipper, Plant Pot, Green Crystal Earring, Knife",6
+0.016666666666666666,"Prada Women Bag, Basketball Rim",2
+0.016666666666666666,"Prada Women Bag, Bamboo Spatula",2
+0.016666666666666666,"Bamboo Spatula, Basketball Rim",2
+0.016666666666666666,"Prada Women Bag, Basketball Rim, Bamboo Spatula",3
+0.016666666666666666,"Apple Airpower Wireless Charger, Bamboo Spatula",2
+0.016666666666666666,"Apple Airpower Wireless Charger, Prada Women Bag",2
+0.016666666666666666,"Apple Airpower Wireless Charger, Basketball Rim",2
+0.016666666666666666,"Apple Airpower Wireless Charger, Prada Women Bag, Bamboo Spatula",3
+0.016666666666666666,"Apple Airpower Wireless Charger, Bamboo Spatula, Basketball Rim",3
+0.016666666666666666,"Apple Airpower Wireless Charger, Prada Women Bag, Basketball Rim",3
+0.016666666666666666,"Apple Airpower Wireless Charger, Prada Women Bag, Basketball Rim, Bamboo Spatula",4
+0.016666666666666666,"Powder Canister, Yellow Peeler",2
+0.016666666666666666,"Oppo F19 Pro Plus, Yellow Peeler",2
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus",2
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Yellow Peeler",3
+0.016666666666666666,"Oppo F19 Pro Plus, Vivo V9",2
+0.016666666666666666,"Vivo V9, Yellow Peeler",2
+0.016666666666666666,"Powder Canister, Vivo V9",2
+0.016666666666666666,"Oppo F19 Pro Plus, Vivo V9, Yellow Peeler",3
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Vivo V9",3
+0.016666666666666666,"Powder Canister, Vivo V9, Yellow Peeler",3
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Vivo V9, Yellow Peeler",4
+0.016666666666666666,"Vivo V9, Cricket Bat",2
+0.016666666666666666,"Oppo F19 Pro Plus, Cricket Bat",2
+0.016666666666666666,"Cricket Bat, Yellow Peeler",2
+0.016666666666666666,"Powder Canister, Cricket Bat",2
+0.016666666666666666,"Vivo V9, Oppo F19 Pro Plus, Cricket Bat",3
+0.016666666666666666,"Vivo V9, Cricket Bat, Yellow Peeler",3
+0.016666666666666666,"Powder Canister, Vivo V9, Cricket Bat",3
+0.016666666666666666,"Oppo F19 Pro Plus, Cricket Bat, Yellow Peeler",3
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Cricket Bat",3
+0.016666666666666666,"Powder Canister, Cricket Bat, Yellow Peeler",3
+0.016666666666666666,"Vivo V9, Oppo F19 Pro Plus, Cricket Bat, Yellow Peeler",4
+0.016666666666666666,"Powder Canister, Vivo V9, Oppo F19 Pro Plus, Cricket Bat",4
+0.016666666666666666,"Powder Canister, Vivo V9, Cricket Bat, Yellow Peeler",4
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Cricket Bat, Yellow Peeler",4
+0.016666666666666666,"Yellow Peeler, Powder Canister, Oppo F19 Pro Plus, Vivo V9, Cricket Bat",5
+0.016666666666666666,"Cricket Bat, Durango SXT RWD",2
+0.016666666666666666,"Vivo V9, Durango SXT RWD",2
+0.016666666666666666,"Oppo F19 Pro Plus, Durango SXT RWD",2
+0.016666666666666666,"Yellow Peeler, Durango SXT RWD",2
+0.016666666666666666,"Powder Canister, Durango SXT RWD",2
+0.016666666666666666,"Vivo V9, Cricket Bat, Durango SXT RWD",3
+0.016666666666666666,"Oppo F19 Pro Plus, Cricket Bat, Durango SXT RWD",3
+0.016666666666666666,"Cricket Bat, Yellow Peeler, Durango SXT RWD",3
+0.016666666666666666,"Powder Canister, Cricket Bat, Durango SXT RWD",3
+0.016666666666666666,"Oppo F19 Pro Plus, Vivo V9, Durango SXT RWD",3
+0.016666666666666666,"Vivo V9, Yellow Peeler, Durango SXT RWD",3
+0.016666666666666666,"Powder Canister, Vivo V9, Durango SXT RWD",3
+0.016666666666666666,"Oppo F19 Pro Plus, Yellow Peeler, Durango SXT RWD",3
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Durango SXT RWD",3
+0.016666666666666666,"Powder Canister, Yellow Peeler, Durango SXT RWD",3
+0.016666666666666666,"Vivo V9, Oppo F19 Pro Plus, Cricket Bat, Durango SXT RWD",4
+0.016666666666666666,"Vivo V9, Cricket Bat, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Vivo V9, Cricket Bat, Durango SXT RWD",4
+0.016666666666666666,"Oppo F19 Pro Plus, Cricket Bat, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Cricket Bat, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Cricket Bat, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Oppo F19 Pro Plus, Vivo V9, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Vivo V9, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Vivo V9, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Yellow Peeler, Durango SXT RWD",4
+0.016666666666666666,"Yellow Peeler, Oppo F19 Pro Plus, Vivo V9, Cricket Bat, Durango SXT RWD",5
+0.016666666666666666,"Powder Canister, Oppo F19 Pro Plus, Vivo V9, Cricket Bat, Durango SXT RWD",5
+0.016666666666666666,"Yellow Peeler, Powder Canister, Vivo V9, Cricket Bat, Durango SXT RWD",5
+0.016666666666666666,"Yellow Peeler, Powder Canister, Oppo F19 Pro Plus, Cricket Bat, Durango SXT RWD",5
+0.016666666666666666,"Yellow Peeler, Powder Canister, Oppo F19 Pro Plus, Vivo V9, Durango SXT RWD",5
+0.016666666666666666,"Yellow Peeler, Powder Canister, Oppo F19 Pro Plus, Vivo V9, Cricket Bat, Durango SXT RWD",6
+0.016666666666666666,"Citrus Squeezer Yellow, Apple",2
+0.016666666666666666,"Citrus Squeezer Yellow, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Egg Slicer, Citrus Squeezer Yellow",2
+0.016666666666666666,"Citrus Squeezer Yellow, Marni Red & Black Suit",2
+0.016666666666666666,"Plate, Citrus Squeezer Yellow",2
+0.016666666666666666,"Citrus Squeezer Yellow, Rice",2
+0.016666666666666666,"Citrus Squeezer Yellow, Apple, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Egg Slicer, Marni Red & Black Suit, Citrus Squeezer Yellow",3
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Marni Red & Black Suit",3
+0.016666666666666666,"Plate, Egg Slicer, Citrus Squeezer Yellow",3
+0.016666666666666666,"Plate, Egg Slicer, Marni Red & Black Suit, Citrus Squeezer Yellow",4
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Rice",3
+0.016666666666666666,"Citrus Squeezer Yellow, Marni Red & Black Suit, Rice",3
+0.016666666666666666,"Egg Slicer, Rice, Citrus Squeezer Yellow",3
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Marni Red & Black Suit, Rice",4
+0.016666666666666666,"Plate, Egg Slicer, Rice, Citrus Squeezer Yellow",4
+0.016666666666666666,"Egg Slicer, Rice, Marni Red & Black Suit, Citrus Squeezer Yellow",4
+0.016666666666666666,"Plate, Rice, Citrus Squeezer Yellow, Marni Red & Black Suit, Egg Slicer",5
+0.016666666666666666,"Citrus Squeezer Yellow, Golden Shoes Woman",2
+0.016666666666666666,"Apple, Golden Shoes Woman",2
+0.016666666666666666,"Golden Shoes Woman, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Citrus Squeezer Yellow, Apple, Golden Shoes Woman",3
+0.016666666666666666,"Citrus Squeezer Yellow, Golden Shoes Woman, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Apple, Golden Shoes Woman, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Citrus Squeezer Yellow, Apple, Golden Shoes Woman, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Eyeshadow Palette with Mirror, Golden Shoes Woman",2
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror",2
+0.016666666666666666,"Eyeshadow Palette with Mirror, Apple",2
+0.016666666666666666,"Eyeshadow Palette with Mirror, Apple Watch Series 4 Gold",2
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Golden Shoes Woman",3
+0.016666666666666666,"Eyeshadow Palette with Mirror, Apple, Golden Shoes Woman",3
+0.016666666666666666,"Eyeshadow Palette with Mirror, Golden Shoes Woman, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Apple",3
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Eyeshadow Palette with Mirror, Apple, Apple Watch Series 4 Gold",3
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Apple, Golden Shoes Woman",4
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Golden Shoes Woman, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Eyeshadow Palette with Mirror, Apple, Golden Shoes Woman, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Citrus Squeezer Yellow, Eyeshadow Palette with Mirror, Apple, Apple Watch Series 4 Gold",4
+0.016666666666666666,"Eyeshadow Palette with Mirror, Golden Shoes Woman, Apple, Citrus Squeezer Yellow, Apple Watch Series 4 Gold",5
+0.016666666666666666,"Plate, Marni Red & Black Suit",2
+0.016666666666666666,"Marni Red & Black Suit, Rice",2
+0.016666666666666666,"Plate, Marni Red & Black Suit, Rice",3
+0.016666666666666666,"Cucumber, Marni Red & Black Suit",2
+0.016666666666666666,"Cucumber, Rolex Cellini Moonphase",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Cucumber",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Cucumber, Rolex Cellini Moonphase",3
+0.016666666666666666,"White Faux Leather Backpack, Decoration Swing",2
+0.016666666666666666,"Oppo K1, Decoration Swing",2
+0.016666666666666666,"Dodge Hornet GT Plus, Decoration Swing",2
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Decoration Swing",2
+0.016666666666666666,"Rice, Decoration Swing",2
+0.016666666666666666,"White Faux Leather Backpack, Oppo K1, Decoration Swing",3
+0.016666666666666666,"Dodge Hornet GT Plus, White Faux Leather Backpack, Decoration Swing",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Decoration Swing",3
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing",3
+0.016666666666666666,"Dodge Hornet GT Plus, Oppo K1, Decoration Swing",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Oppo K1, Decoration Swing",3
+0.016666666666666666,"Rice, Oppo K1, Decoration Swing",3
+0.016666666666666666,"Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair, Decoration Swing",3
+0.016666666666666666,"Dodge Hornet GT Plus, Rice, Decoration Swing",3
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rice, Decoration Swing",3
+0.016666666666666666,"Dodge Hornet GT Plus, White Faux Leather Backpack, Oppo K1, Decoration Swing",4
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Oppo K1, Decoration Swing",4
+0.016666666666666666,"Rice, White Faux Leather Backpack, Oppo K1, Decoration Swing",4
+0.016666666666666666,"Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair, White Faux Leather Backpack, Decoration Swing",4
+0.016666666666666666,"Dodge Hornet GT Plus, Rice, White Faux Leather Backpack, Decoration Swing",4
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing, Knoll Saarinen Executive Conference Chair",4
+0.016666666666666666,"Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair, Oppo K1, Decoration Swing",4
+0.016666666666666666,"Dodge Hornet GT Plus, Rice, Oppo K1, Decoration Swing",4
+0.016666666666666666,"Rice, Oppo K1, Decoration Swing, Knoll Saarinen Executive Conference Chair",4
+0.016666666666666666,"Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair, Rice, Decoration Swing",4
+0.016666666666666666,"White Faux Leather Backpack, Decoration Swing, Oppo K1, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing, Oppo K1, Dodge Hornet GT Plus",5
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing, Oppo K1, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"Rice, Decoration Swing, Oppo K1, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",5
+0.016666666666666666,"Rice, White Faux Leather Backpack, Decoration Swing, Oppo K1, Dodge Hornet GT Plus, Knoll Saarinen Executive Conference Chair",6
+0.016666666666666666,"Black Sun Glasses, Calvin Klein CK One",2
+0.016666666666666666,"Black Sun Glasses, Yellow Peeler",2
+0.016666666666666666,"Black Sun Glasses, Yellow Peeler, Calvin Klein CK One",3
+0.016666666666666666,"Apple Airpods, Vivo X21",2
+0.016666666666666666,"Apple Airpods, Black Sun Glasses",2
+0.016666666666666666,"Apple Airpods, Vivo X21, Black Sun Glasses",3
+0.016666666666666666,"Citrus Squeezer Yellow, Mug Tree Stand",2
+0.016666666666666666,"Egg Slicer, Mug Tree Stand",2
+0.016666666666666666,"Mug Tree Stand, Marni Red & Black Suit",2
+0.016666666666666666,"Plate, Mug Tree Stand",2
+0.016666666666666666,"Mug Tree Stand, Rice",2
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Citrus Squeezer Yellow",3
+0.016666666666666666,"Citrus Squeezer Yellow, Mug Tree Stand, Marni Red & Black Suit",3
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Mug Tree Stand",3
+0.016666666666666666,"Citrus Squeezer Yellow, Mug Tree Stand, Rice",3
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Marni Red & Black Suit",3
+0.016666666666666666,"Plate, Egg Slicer, Mug Tree Stand",3
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Rice",3
+0.016666666666666666,"Plate, Mug Tree Stand, Marni Red & Black Suit",3
+0.016666666666666666,"Mug Tree Stand, Marni Red & Black Suit, Rice",3
+0.016666666666666666,"Plate, Mug Tree Stand, Rice",3
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Marni Red & Black Suit, Citrus Squeezer Yellow",4
+0.016666666666666666,"Plate, Egg Slicer, Mug Tree Stand, Citrus Squeezer Yellow",4
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Rice, Citrus Squeezer Yellow",4
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Mug Tree Stand, Marni Red & Black Suit",4
+0.016666666666666666,"Citrus Squeezer Yellow, Mug Tree Stand, Marni Red & Black Suit, Rice",4
+0.016666666666666666,"Plate, Citrus Squeezer Yellow, Mug Tree Stand, Rice",4
+0.016666666666666666,"Plate, Egg Slicer, Mug Tree Stand, Marni Red & Black Suit",4
+0.016666666666666666,"Egg Slicer, Mug Tree Stand, Marni Red & Black Suit, Rice",4
+0.016666666666666666,"Plate, Egg Slicer, Mug Tree Stand, Rice",4
+0.016666666666666666,"Plate, Mug Tree Stand, Marni Red & Black Suit, Rice",4
+0.016666666666666666,"Plate, Mug Tree Stand, Citrus Squeezer Yellow, Marni Red & Black Suit, Egg Slicer",5
+0.016666666666666666,"Rice, Mug Tree Stand, Citrus Squeezer Yellow, Marni Red & Black Suit, Egg Slicer",5
+0.016666666666666666,"Plate, Rice, Mug Tree Stand, Citrus Squeezer Yellow, Egg Slicer",5
+0.016666666666666666,"Plate, Rice, Mug Tree Stand, Marni Red & Black Suit, Citrus Squeezer Yellow",5
+0.016666666666666666,"Plate, Rice, Mug Tree Stand, Marni Red & Black Suit, Egg Slicer",5
+0.016666666666666666,"Plate, Rice, Mug Tree Stand, Citrus Squeezer Yellow, Marni Red & Black Suit, Egg Slicer",6
+0.016666666666666666,"Baseball Ball, Slotted Turner",2
+0.016666666666666666,"Powder Canister, Slotted Turner",2
+0.016666666666666666,"Powder Canister, Baseball Ball, Slotted Turner",3
+0.016666666666666666,"Golf Ball, Gray Dress",2
+0.016666666666666666,"Golf Ball, Black Women's Gown",2
+0.016666666666666666,"Yellow Peeler, Calvin Klein CK One",2
+0.016666666666666666,"Plant Pot, Calvin Klein CK One",2
+0.016666666666666666,"Dodge Hornet GT Plus, Calvin Klein CK One",2
+0.016666666666666666,"Gray Dress, Calvin Klein CK One",2
+0.016666666666666666,"Calvin Klein CK One, Sports Sneakers Off White Red",2
+0.016666666666666666,"Plant Pot, Dodge Hornet GT Plus, Calvin Klein CK One",3
+0.016666666666666666,"Dodge Hornet GT Plus, Gray Dress, Calvin Klein CK One",3
+0.016666666666666666,"Plant Pot, Gray Dress, Calvin Klein CK One",3
+0.016666666666666666,"Dodge Hornet GT Plus, Plant Pot, Gray Dress, Calvin Klein CK One",4
+0.016666666666666666,"Calvin Klein CK One, Gray Dress, Sports Sneakers Off White Red",3
+0.016666666666666666,"Calvin Klein CK One, Dodge Hornet GT Plus, Sports Sneakers Off White Red",3
+0.016666666666666666,"Plant Pot, Calvin Klein CK One, Sports Sneakers Off White Red",3
+0.016666666666666666,"Calvin Klein CK One, Gray Dress, Dodge Hornet GT Plus, Sports Sneakers Off White Red",4
+0.016666666666666666,"Plant Pot, Calvin Klein CK One, Gray Dress, Sports Sneakers Off White Red",4
+0.016666666666666666,"Plant Pot, Calvin Klein CK One, Dodge Hornet GT Plus, Sports Sneakers Off White Red",4
+0.016666666666666666,"Calvin Klein CK One, Sports Sneakers Off White Red, Plant Pot, Gray Dress, Dodge Hornet GT Plus",5
+0.016666666666666666,"Chanel Coco Noir Eau De, Rolex Datejust",2
+0.016666666666666666,"Chanel Coco Noir Eau De, Rice",2
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De",2
+0.016666666666666666,"Chanel Coco Noir Eau De, Gray Dress",2
+0.016666666666666666,"Chanel Coco Noir Eau De, Rice, Rolex Datejust",3
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Gray Dress",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Chanel Coco Noir Eau De",2
+0.016666666666666666,"Rolex Cellini Date Black Dial, Rolex Datejust",2
+0.016666666666666666,"Rolex Cellini Date Black Dial, Rice",2
+0.016666666666666666,"Rolex Cellini Date Black Dial, Chanel Coco Noir Eau De, Rolex Datejust",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Chanel Coco Noir Eau De, Rice",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Rolex Datejust, Rice",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Chanel Coco Noir Eau De, Rice, Rolex Datejust",4
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove",2
+0.016666666666666666,"Baseball Glove, Chanel Coco Noir Eau De",2
+0.016666666666666666,"Baseball Glove, Rolex Datejust",2
+0.016666666666666666,"Baseball Glove, Rice",2
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Chanel Coco Noir Eau De",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Rolex Datejust",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Rice",3
+0.016666666666666666,"Baseball Glove, Chanel Coco Noir Eau De, Rolex Datejust",3
+0.016666666666666666,"Baseball Glove, Chanel Coco Noir Eau De, Rice",3
+0.016666666666666666,"Baseball Glove, Rolex Datejust, Rice",3
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Chanel Coco Noir Eau De, Rolex Datejust",4
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Chanel Coco Noir Eau De, Rice",4
+0.016666666666666666,"Rolex Cellini Date Black Dial, Baseball Glove, Rolex Datejust, Rice",4
+0.016666666666666666,"Baseball Glove, Chanel Coco Noir Eau De, Rice, Rolex Datejust",4
+0.016666666666666666,"Baseball Glove, Rolex Cellini Date Black Dial, Rice, Chanel Coco Noir Eau De, Rolex Datejust",5
+0.016666666666666666,"Chanel Coco Noir Eau De, Corset With Black Skirt",2
+0.016666666666666666,"Golf Ball, Corset With Black Skirt",2
+0.016666666666666666,"Corset With Black Skirt, Gray Dress",2
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Corset With Black Skirt",3
+0.016666666666666666,"Chanel Coco Noir Eau De, Corset With Black Skirt, Gray Dress",3
+0.016666666666666666,"Golf Ball, Corset With Black Skirt, Gray Dress",3
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Corset With Black Skirt, Gray Dress",4
+0.016666666666666666,"Corset With Black Skirt, Beef Steak",2
+0.016666666666666666,"Chanel Coco Noir Eau De, Beef Steak",2
+0.016666666666666666,"Golf Ball, Beef Steak",2
+0.016666666666666666,"Gray Dress, Beef Steak",2
+0.016666666666666666,"Chanel Coco Noir Eau De, Corset With Black Skirt, Beef Steak",3
+0.016666666666666666,"Golf Ball, Corset With Black Skirt, Beef Steak",3
+0.016666666666666666,"Corset With Black Skirt, Gray Dress, Beef Steak",3
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Beef Steak",3
+0.016666666666666666,"Chanel Coco Noir Eau De, Gray Dress, Beef Steak",3
+0.016666666666666666,"Golf Ball, Gray Dress, Beef Steak",3
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Corset With Black Skirt, Beef Steak",4
+0.016666666666666666,"Chanel Coco Noir Eau De, Corset With Black Skirt, Gray Dress, Beef Steak",4
+0.016666666666666666,"Golf Ball, Corset With Black Skirt, Gray Dress, Beef Steak",4
+0.016666666666666666,"Golf Ball, Chanel Coco Noir Eau De, Gray Dress, Beef Steak",4
+0.016666666666666666,"Golf Ball, Corset With Black Skirt, Chanel Coco Noir Eau De, Gray Dress, Beef Steak",5
+0.016666666666666666,"Hand Blender, Nike Air Jordan 1 Red And Black",2
+0.016666666666666666,"Puma Future Rider Trainers, Nike Air Jordan 1 Red And Black",2
+0.016666666666666666,"Hand Blender, Puma Future Rider Trainers, Nike Air Jordan 1 Red And Black",3
+0.016666666666666666,"Bedside Table African Cherry, Nike Air Jordan 1 Red And Black",2
+0.016666666666666666,"Hand Blender, Bedside Table African Cherry",2
+0.016666666666666666,"Puma Future Rider Trainers, Bedside Table African Cherry",2
+0.016666666666666666,"Hand Blender, Bedside Table African Cherry, Nike Air Jordan 1 Red And Black",3
+0.016666666666666666,"Puma Future Rider Trainers, Bedside Table African Cherry, Nike Air Jordan 1 Red And Black",3
+0.016666666666666666,"Hand Blender, Puma Future Rider Trainers, Bedside Table African Cherry",3
+0.016666666666666666,"Hand Blender, Puma Future Rider Trainers, Bedside Table African Cherry, Nike Air Jordan 1 Red And Black",4
+0.016666666666666666,"Cricket Ball, Dog Food",2
+0.016666666666666666,"Cricket Ball, Samsung Galaxy S8",2
+0.016666666666666666,"Cricket Ball, Cat Food",2
+0.016666666666666666,"Cricket Ball, Samsung Galaxy S8, Dog Food",3
+0.016666666666666666,"MotoGP CI.H1, Spoon",2
+0.016666666666666666,"Cricket Ball, Spoon",2
+0.016666666666666666,"Spoon, Dog Food",2
+0.016666666666666666,"Samsung Galaxy S8, Spoon",2
+0.016666666666666666,"MotoGP CI.H1, Cricket Ball, Spoon",3
+0.016666666666666666,"Spoon, MotoGP CI.H1, Dog Food",3
+0.016666666666666666,"MotoGP CI.H1, Samsung Galaxy S8, Spoon",3
+0.016666666666666666,"Cricket Ball, Spoon, Dog Food",3
+0.016666666666666666,"Cricket Ball, Samsung Galaxy S8, Spoon",3
+0.016666666666666666,"Samsung Galaxy S8, Spoon, Dog Food",3
+0.016666666666666666,"Spoon, MotoGP CI.H1, Cricket Ball, Dog Food",4
+0.016666666666666666,"Cricket Ball, MotoGP CI.H1, Samsung Galaxy S8, Spoon",4
+0.016666666666666666,"Spoon, MotoGP CI.H1, Samsung Galaxy S8, Dog Food",4
+0.016666666666666666,"Cricket Ball, Samsung Galaxy S8, Spoon, Dog Food",4
+0.016666666666666666,"MotoGP CI.H1, Cricket Ball, Spoon, Samsung Galaxy S8, Dog Food",5
+0.016666666666666666,"Strawberry, Spoon",2
+0.016666666666666666,"Strawberry, MotoGP CI.H1",2
+0.016666666666666666,"Strawberry, Cricket Ball",2
+0.016666666666666666,"Strawberry, Dog Food",2
+0.016666666666666666,"Strawberry, Samsung Galaxy S8",2
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Spoon",3
+0.016666666666666666,"Strawberry, Cricket Ball, Spoon",3
+0.016666666666666666,"Strawberry, Spoon, Dog Food",3
+0.016666666666666666,"Strawberry, Samsung Galaxy S8, Spoon",3
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball",3
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Dog Food",3
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Samsung Galaxy S8",3
+0.016666666666666666,"Strawberry, Cricket Ball, Dog Food",3
+0.016666666666666666,"Strawberry, Cricket Ball, Samsung Galaxy S8",3
+0.016666666666666666,"Strawberry, Samsung Galaxy S8, Dog Food",3
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Spoon",4
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Dog Food, Spoon",4
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Samsung Galaxy S8, Spoon",4
+0.016666666666666666,"Strawberry, Cricket Ball, Spoon, Dog Food",4
+0.016666666666666666,"Strawberry, Cricket Ball, Samsung Galaxy S8, Spoon",4
+0.016666666666666666,"Strawberry, Samsung Galaxy S8, Spoon, Dog Food",4
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Dog Food",4
+0.016666666666666666,"Strawberry, Cricket Ball, MotoGP CI.H1, Samsung Galaxy S8",4
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Samsung Galaxy S8, Dog Food",4
+0.016666666666666666,"Strawberry, Cricket Ball, Samsung Galaxy S8, Dog Food",4
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Spoon, Dog Food",5
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Spoon, Samsung Galaxy S8",5
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Spoon, Samsung Galaxy S8, Dog Food",5
+0.016666666666666666,"Strawberry, Cricket Ball, Spoon, Samsung Galaxy S8, Dog Food",5
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Samsung Galaxy S8, Dog Food",5
+0.016666666666666666,"Strawberry, MotoGP CI.H1, Cricket Ball, Spoon, Samsung Galaxy S8, Dog Food",6
+0.016666666666666666,"Tray, Slotted Turner",2
+0.016666666666666666,"Tray, Green and Black Glasses",2
+0.016666666666666666,"Slotted Turner, Green and Black Glasses",2
+0.016666666666666666,"Tray, Slotted Turner, Green and Black Glasses",3
+0.016666666666666666,"Kiwi, Green and Black Glasses",2
+0.016666666666666666,"Tray, Kiwi",2
+0.016666666666666666,"Slotted Turner, Kiwi",2
+0.016666666666666666,"Kiwi, Tray, Green and Black Glasses",3
+0.016666666666666666,"Kiwi, Slotted Turner, Green and Black Glasses",3
+0.016666666666666666,"Tray, Slotted Turner, Kiwi",3
+0.016666666666666666,"Kiwi, Tray, Slotted Turner, Green and Black Glasses",4
+0.016666666666666666,"Juice, Kiwi",2
+0.016666666666666666,"Juice, Green and Black Glasses",2
+0.016666666666666666,"Juice, Tray",2
+0.016666666666666666,"Juice, Slotted Turner",2
+0.016666666666666666,"Juice, Kiwi, Green and Black Glasses",3
+0.016666666666666666,"Juice, Tray, Kiwi",3
+0.016666666666666666,"Juice, Slotted Turner, Kiwi",3
+0.016666666666666666,"Juice, Tray, Green and Black Glasses",3
+0.016666666666666666,"Juice, Slotted Turner, Green and Black Glasses",3
+0.016666666666666666,"Juice, Tray, Slotted Turner",3
+0.016666666666666666,"Juice, Kiwi, Tray, Green and Black Glasses",4
+0.016666666666666666,"Juice, Kiwi, Slotted Turner, Green and Black Glasses",4
+0.016666666666666666,"Juice, Tray, Slotted Turner, Kiwi",4
+0.016666666666666666,"Juice, Tray, Slotted Turner, Green and Black Glasses",4
+0.016666666666666666,"Juice, Kiwi, Tray, Green and Black Glasses, Slotted Turner",5
+0.016666666666666666,"Juice, Charger SXT RWD",2
+0.016666666666666666,"Charger SXT RWD, Kiwi",2
+0.016666666666666666,"Charger SXT RWD, Green and Black Glasses",2
+0.016666666666666666,"Tray, Charger SXT RWD",2
+0.016666666666666666,"Charger SXT RWD, Slotted Turner",2
+0.016666666666666666,"Juice, Charger SXT RWD, Kiwi",3
+0.016666666666666666,"Juice, Charger SXT RWD, Green and Black Glasses",3
+0.016666666666666666,"Juice, Tray, Charger SXT RWD",3
+0.016666666666666666,"Juice, Charger SXT RWD, Slotted Turner",3
+0.016666666666666666,"Kiwi, Charger SXT RWD, Green and Black Glasses",3
+0.016666666666666666,"Tray, Charger SXT RWD, Kiwi",3
+0.016666666666666666,"Slotted Turner, Charger SXT RWD, Kiwi",3
+0.016666666666666666,"Tray, Charger SXT RWD, Green and Black Glasses",3
+0.016666666666666666,"Slotted Turner, Charger SXT RWD, Green and Black Glasses",3
+0.016666666666666666,"Tray, Charger SXT RWD, Slotted Turner",3
+0.016666666666666666,"Juice, Kiwi, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Juice, Tray, Charger SXT RWD, Kiwi",4
+0.016666666666666666,"Juice, Slotted Turner, Charger SXT RWD, Kiwi",4
+0.016666666666666666,"Juice, Tray, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Juice, Slotted Turner, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Juice, Tray, Charger SXT RWD, Slotted Turner",4
+0.016666666666666666,"Kiwi, Tray, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Kiwi, Slotted Turner, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Slotted Turner, Tray, Charger SXT RWD, Kiwi",4
+0.016666666666666666,"Slotted Turner, Tray, Charger SXT RWD, Green and Black Glasses",4
+0.016666666666666666,"Juice, Kiwi, Tray, Charger SXT RWD, Green and Black Glasses",5
+0.016666666666666666,"Juice, Kiwi, Charger SXT RWD, Green and Black Glasses, Slotted Turner",5
+0.016666666666666666,"Juice, Kiwi, Tray, Charger SXT RWD, Slotted Turner",5
+0.016666666666666666,"Juice, Tray, Charger SXT RWD, Green and Black Glasses, Slotted Turner",5
+0.016666666666666666,"Kiwi, Tray, Charger SXT RWD, Green and Black Glasses, Slotted Turner",5
+0.016666666666666666,"Juice, Kiwi, Tray, Charger SXT RWD, Green and Black Glasses, Slotted Turner",6
+0.016666666666666666,"Knoll Saarinen Executive Conference Chair, Rolex Cellini Moonphase",2
+0.016666666666666666,"Rolex Cellini Moonphase, Dior J'adore",2
+0.016666666666666666,"iPhone 5s, Cucumber",2
+0.016666666666666666,"iPhone 5s, Rolex Cellini Moonphase",2
+0.016666666666666666,"iPhone 5s, Knoll Saarinen Executive Conference Chair",2
+0.016666666666666666,"iPhone 5s, Cucumber, Rolex Cellini Moonphase",3
+0.016666666666666666,"iPhone 5s, Cucumber, Knoll Saarinen Executive Conference Chair",3
+0.016666666666666666,"Tropical Earring, Cricket Ball",2
+0.016666666666666666,Party Glasses,1
+0.016666666666666666,Realme X,1
+0.016666666666666666,Fish Steak,1
+0.016666666666666666,"Tropical Earring, Selfie Stick Monopod",2
+0.016666666666666666,"Grater Black, Rolex Cellini Moonphase, Dior J'adore",3
+0.016666666666666666,"Tropical Earring, Cat Food",2
+0.016666666666666666,Soft Drinks,1
+0.016666666666666666,"Tropical Earring, Wooden Bathroom Sink With Mirror, Selfie Stick Monopod",3
+0.016666666666666666,Realme XT,1
+0.016666666666666666,Water,1
+0.016666666666666666,Classic Sun Glasses,1
+0.016666666666666666,"Tropical Earring, Cricket Ball, Wooden Bathroom Sink With Mirror",3
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Tropical Earring, Cat Food",3
+0.016666666666666666,"Tropical Earring, Cricket Ball, Selfie Stick Monopod",3
+0.016666666666666666,"Tropical Earring, Cat Food, Selfie Stick Monopod",3
+0.016666666666666666,"iPhone 5s, Rolex Cellini Moonphase, Knoll Saarinen Executive Conference Chair",3
+0.016666666666666666,"iPhone 5s, Cucumber, Rolex Cellini Moonphase, Knoll Saarinen Executive Conference Chair",4
+0.016666666666666666,"Basketball, Cat Food",2
+0.016666666666666666,"Cricket Ball, Selfie Stick Monopod",2
+0.016666666666666666,"Cat Food, Selfie Stick Monopod",2
+0.016666666666666666,"Cricket Ball, Cat Food, Selfie Stick Monopod",3
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Selfie Stick Monopod",2
+0.016666666666666666,"Cricket Ball, Wooden Bathroom Sink With Mirror",2
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Cat Food",2
+0.016666666666666666,"Cricket Ball, Wooden Bathroom Sink With Mirror, Selfie Stick Monopod",3
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Cat Food, Selfie Stick Monopod",3
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Cricket Ball, Cat Food",3
+0.016666666666666666,"Wooden Bathroom Sink With Mirror, Cricket Ball, Cat Food, Selfie Stick Monopod",4
+0.016666666666666666,"Tropical Earring, Wooden Bathroom Sink With Mirror",2
+0.016666666666666666,Apple iPhone Charger,1

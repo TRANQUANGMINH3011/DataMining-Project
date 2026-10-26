@@ -24,7 +24,7 @@ logger = logging.getLogger("Recommender.CB")
 # ===========================================================================
 
 def load_product_data(engine_instance=None) -> pd.DataFrame:
-    """Load du lieu san pham (Dim_Product + Dim_Category) tu DWH hoac Staging CSV."""
+    """Load du lieu san pham (Dim_Product + Dim_Category) tu DWH hoac Staging CSV/Parquet."""
     project_root = Path(__file__).resolve().parent.parent.parent
     processed_dir = project_root / "data" / "processed"
 
@@ -32,7 +32,7 @@ def load_product_data(engine_instance=None) -> pd.DataFrame:
         try:
             from sqlalchemy import text
             sql = """SELECT p.product_id, p.product_name, p.category_id, p.description,
-                            p.price, p.brand, c.category_name
+                            p.price, p.brand, p.ingredients_text, c.category_name
                      FROM dim_product p LEFT JOIN dim_category c ON p.category_id = c.category_id"""
             with engine_instance.connect() as conn:
                 df = pd.read_sql_query(text(sql), conn)
@@ -44,16 +44,20 @@ def load_product_data(engine_instance=None) -> pd.DataFrame:
     prod_path = processed_dir / "dim_product.csv"
     cat_path = processed_dir / "dim_category.csv"
     if not prod_path.exists():
+        prod_path = processed_dir / "dim_product.parquet"
+        cat_path = processed_dir / "dim_category.parquet"
+
+    if not prod_path.exists():
         raise FileNotFoundError(str(prod_path))
 
-    df_prod = pd.read_csv(prod_path)
+    df_prod = pd.read_parquet(prod_path) if str(prod_path).endswith(".parquet") else pd.read_csv(prod_path)
     if cat_path.exists():
-        df_cat = pd.read_csv(cat_path)
+        df_cat = pd.read_parquet(cat_path) if str(cat_path).endswith(".parquet") else pd.read_csv(cat_path)
         df_prod = df_prod.merge(df_cat[["category_id", "category_name"]], on="category_id", how="left")
     else:
         df_prod["category_name"] = "unknown"
 
-    logger.info("Da tai %d san pham tu Staging CSV.", len(df_prod))
+    logger.info("Da tai %d san pham tu Staging.", len(df_prod))
     return df_prod
 
 
@@ -68,13 +72,14 @@ def _fill_col(s: pd.Series, default: str = "") -> pd.Series:
 def build_text_features(df: pd.DataFrame) -> pd.DataFrame:
     """Tao cot 'text_features' bang cach ghep cac truong van ban cua san pham.
 
-    So do trong so: category_name (x3) > product_name (x2) > brand (x1) > description (x1).
+    So do trong so: category_name (x3) > product_name (x2) > brand (x1) > ingredients (x1) > description (x1).
     """
     df = df.copy()
     cat = _fill_col(df.get("category_name", pd.Series([""] * len(df))), "unknown")
     name = _fill_col(df.get("product_name", pd.Series([""] * len(df))), "")
     brand = _fill_col(df.get("brand", pd.Series([""] * len(df))), "")
     desc = _fill_col(df.get("description", pd.Series([""] * len(df))), "")
+    ingredients = _fill_col(df.get("ingredients_text", pd.Series([""] * len(df))), "")
 
     # Lam sach: giu lai ky tu alphanumeric va khoang trang
     import re
@@ -85,6 +90,7 @@ def build_text_features(df: pd.DataFrame) -> pd.DataFrame:
         (cat.apply(clean) + " ") * 3
         + (name.apply(clean) + " ") * 2
         + brand.apply(clean) + " "
+        + ingredients.apply(clean) + " "
         + desc.str[:500].apply(clean)
     )
     df["text_features"] = df["text_features"].str.replace(r"\s+", " ", regex=True).str.strip()

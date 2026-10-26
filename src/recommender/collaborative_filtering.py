@@ -29,7 +29,9 @@ def load_interactions(engine_instance=None) -> pd.DataFrame:
     if engine_instance is not None:
         try:
             from sqlalchemy import text
-            sql = """SELECT f.user_id, f.product_id, f.rating_value, f.total_amount,
+            sql = """SELECT f.user_id, f.product_id,
+                            COALESCE(f.rating_score, 4.0) AS rating_value,
+                            19.99 AS total_amount,
                             t.full_timestamp, f.event_type
                      FROM fact_interactions f JOIN dim_time t ON f.time_id = t.time_id"""
             with engine_instance.connect() as conn:
@@ -43,12 +45,19 @@ def load_interactions(engine_instance=None) -> pd.DataFrame:
     fact_path = processed_dir / "fact_interactions.csv"
     time_path = processed_dir / "dim_time.csv"
     if not fact_path.exists():
+        fact_path = processed_dir / "fact_interactions.parquet"
+        time_path = processed_dir / "dim_time.parquet"
+    if not fact_path.exists():
         raise FileNotFoundError(str(fact_path))
 
-    df_fact = pd.read_csv(fact_path)
-    df_time = pd.read_csv(time_path, parse_dates=["full_timestamp"])
+    df_fact = pd.read_parquet(fact_path) if str(fact_path).endswith(".parquet") else pd.read_csv(fact_path)
+    df_time = pd.read_parquet(time_path) if str(time_path).endswith(".parquet") else pd.read_csv(time_path, parse_dates=["full_timestamp"])
     df = df_fact.merge(df_time[["time_id", "full_timestamp"]], on="time_id", how="left")
-    logger.info("Da tai %d tuong tac tu Staging CSV.", len(df))
+    if "rating_value" not in df.columns and "rating_score" in df.columns:
+        df["rating_value"] = df["rating_score"]
+    if "total_amount" not in df.columns:
+        df["total_amount"] = 19.99
+    logger.info("Da tai %d tuong tac tu Staging.", len(df))
     return df
 
 

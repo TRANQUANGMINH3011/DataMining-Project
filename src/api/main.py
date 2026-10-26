@@ -593,9 +593,9 @@ def get_sample_users():
     """Trả về danh sách các user mẫu thuộc các phân khúc RFM khác nhau để dễ dàng test API."""
     try:
         sql = """
-        SELECT rfm_segment, user_id, location, age, created_at
+        SELECT rfm_segment, user_id, COALESCE(city || ', ' || country, city, country, 'Unknown') AS location, age, created_at
         FROM (
-            SELECT rfm_segment, user_id, location, age, created_at,
+            SELECT rfm_segment, user_id, city, country, age, created_at,
                    ROW_NUMBER() OVER(PARTITION BY rfm_segment ORDER BY user_id) as rn
             FROM dim_user
             WHERE rfm_segment IS NOT NULL

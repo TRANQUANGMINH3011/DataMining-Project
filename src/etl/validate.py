@@ -214,9 +214,30 @@ def run_data_quality_report(
 
 
 if __name__ == "__main__":
-    from src.etl.extract import extract_raw_dataset
-    from src.etl.transform import transform_all
+    from src.etl.extract.amazon_loader import extract_amazon_metadata, extract_amazon_reviews
+    from src.etl.extract.dummyjson_api import fetch_dummyjson_users
+    from src.etl.transform import (
+        build_dim_category_and_product,
+        build_dim_time,
+        build_dim_user,
+        build_fact_interactions,
+        clean_amazon_reviews,
+    )
 
-    raw = extract_raw_dataset(sample_size=500)
-    transformed = transform_all(raw)
+    df_rev = clean_amazon_reviews(extract_amazon_reviews(sample_size=500))
+    df_meta = extract_amazon_metadata(sample_size=500)
+    df_users_dj = fetch_dummyjson_users()
+
+    dim_cat, dim_prod = build_dim_category_and_product(df_rev, df_meta)
+    dim_u = build_dim_user(df_rev, df_users_dj)
+    dim_t = build_dim_time(df_rev)
+    fact_i = build_fact_interactions(df_rev, dim_u, dim_prod, dim_t)
+
+    transformed = {
+        "dim_category": dim_cat,
+        "dim_product": dim_prod,
+        "dim_user": dim_u,
+        "dim_time": dim_t,
+        "fact_interactions": fact_i,
+    }
     run_data_quality_report(transformed)

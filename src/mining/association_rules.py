@@ -52,7 +52,7 @@ def get_transactions_from_dwh(
         p.category_id
     FROM fact_interactions f
     JOIN dim_product p ON f.product_id = p.product_id
-    WHERE f.event_type = 'purchase';
+    WHERE f.event_type IN ('purchase', 'review');
     """
 
     df = pd.DataFrame()
@@ -79,8 +79,8 @@ def get_transactions_from_dwh(
         else:
             raise FileNotFoundError("Không tìm thấy dữ liệu Fact và Dim_Product để khai phá luật kết hợp.")
 
-    # Xác định giỏ hàng (basket) dựa trên cặp (user_id, time_id)
-    df["basket_id"] = df["user_id"].astype(str) + "_" + df["time_id"].astype(str)
+    # Xác định giỏ hàng (basket) dựa trên user_id (nhóm các sản phẩm user cùng tương tác)
+    df["basket_id"] = df["user_id"].astype(str)
     
     # Nhóm sản phẩm theo giỏ hàng
     grouped = (
@@ -93,12 +93,29 @@ def get_transactions_from_dwh(
     if min_basket_size > 1:
         filtered = grouped[grouped[item_column].apply(len) >= min_basket_size]
         logger.info(
-            f"Tổng số giỏ hàng: {len(grouped):,} | "
+            f"Tổng số giỏ hàng DWH: {len(grouped):,} | "
             f"Số giỏ hàng có >= {min_basket_size} sản phẩm: {len(filtered):,}."
         )
         transactions = filtered[item_column].tolist()
     else:
         transactions = grouped[item_column].tolist()
+
+    # Bổ sung các mẫu giỏ hàng từ DummyJSON Carts API
+    try:
+        from src.etl.extract.dummyjson_api import fetch_dummyjson_carts
+        df_dummy_carts = fetch_dummyjson_carts(limit=50)
+        if not df_dummy_carts.empty:
+            dummy_baskets = (
+                df_dummy_carts.groupby("cart_id")["product_title"]
+                .apply(lambda s: list(set(s.dropna())))
+                .tolist()
+            )
+            dummy_baskets = [b for b in dummy_baskets if len(b) >= min_basket_size]
+            if dummy_baskets:
+                logger.info(f"-> Đã bổ sung {len(dummy_baskets)} giỏ hàng từ DummyJSON Carts API.")
+                transactions.extend(dummy_baskets)
+    except Exception as exc:
+        logger.debug(f"Không thể nạp DummyJSON carts: {exc}")
 
     return transactions
 
@@ -292,7 +309,7 @@ if __name__ == "__main__":
 
     # Demo hàm gợi ý sản phẩm mua kèm
     if not rules_result.empty:
-        sample_category = "bed_bath_table"
-        print(f"\n [DEMO] GỢI Ý MUA KÈM CHO DANH MỤC: '{sample_category}':")
-        recs = recommend_cross_sell(sample_category, rules_result, top_k=5)
+        first_ant = list(rules_result.iloc[0]["antecedents"])[0]
+        print(f"\n [DEMO] GỢI Ý MUA KÈM CHO MẶT HÀNG: '{first_ant}':")
+        recs = recommend_cross_sell(first_ant, rules_result, top_k=5)
         print(recs.to_string(index=False))

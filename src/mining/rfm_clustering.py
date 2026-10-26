@@ -41,11 +41,11 @@ def calculate_rfm_from_dwh(engine_instance=None) -> pd.DataFrame:
     SELECT 
         f.user_id,
         MAX(t.full_timestamp) AS last_purchase_date,
-        COUNT(f.interaction_id) AS frequency,
-        SUM(f.total_amount) AS monetary
+        COUNT(f.product_id) AS frequency,
+        SUM(COALESCE(p.price, 19.99)) AS monetary
     FROM fact_interactions f
     JOIN dim_time t ON f.time_id = t.time_id
-    WHERE f.event_type = 'purchase'
+    LEFT JOIN dim_product p ON f.product_id = p.product_id
     GROUP BY f.user_id;
     """
 
@@ -63,9 +63,11 @@ def calculate_rfm_from_dwh(engine_instance=None) -> pd.DataFrame:
 
         fact_path = processed_dir / "fact_interactions.parquet"
         time_path = processed_dir / "dim_time.parquet"
+        prod_path = processed_dir / "dim_product.parquet"
         if not fact_path.exists():
             fact_path = processed_dir / "fact_interactions.csv"
             time_path = processed_dir / "dim_time.csv"
+            prod_path = processed_dir / "dim_product.csv"
 
         if fact_path.exists() and time_path.exists():
             logger.info("Đang nạp dữ liệu từ Staging để tính RFM...")
@@ -73,12 +75,19 @@ def calculate_rfm_from_dwh(engine_instance=None) -> pd.DataFrame:
             df_time = pd.read_parquet(time_path) if time_path.suffix == ".parquet" else pd.read_csv(time_path)
 
             merged = df_fact.merge(df_time, on="time_id", how="inner")
+            if prod_path.exists():
+                df_prod = pd.read_parquet(prod_path) if prod_path.suffix == ".parquet" else pd.read_csv(prod_path)
+                merged = merged.merge(df_prod[["product_id", "price"]], on="product_id", how="left")
+            else:
+                merged["price"] = 19.99
+
             merged["full_timestamp"] = pd.to_datetime(merged["full_timestamp"])
+            merged["monetary"] = pd.to_numeric(merged.get("total_amount", merged["price"]), errors="coerce").fillna(19.99)
 
             rfm_df = merged.groupby("user_id").agg(
                 last_purchase_date=("full_timestamp", "max"),
-                frequency=("interaction_id", "count"),
-                monetary=("total_amount", "sum"),
+                frequency=("product_id", "count"),
+                monetary=("monetary", "sum"),
             ).reset_index()
         else:
             raise FileNotFoundError("Không tìm thấy dữ liệu Fact và Dim_Time để tính RFM.")

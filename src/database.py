@@ -95,14 +95,15 @@ class DimCategory(Base):
 
 
 class DimUser(Base):
-    """Bảng chiều người dùng."""
+    """Bảng chiều người dùng (Amazon ReviewerID + DummyJSON)."""
 
     __tablename__ = "dim_user"
 
     user_id = Column(String(100), primary_key=True, index=True)
     age = Column(Integer, nullable=True)
     gender = Column(String(20), nullable=True)
-    location = Column(String(255), nullable=True)
+    city = Column(String(150), nullable=True)
+    country = Column(String(100), nullable=True)
     created_at = Column(DateTime, nullable=True)
     rfm_segment = Column(String(50), default="Unassigned")
 
@@ -110,18 +111,19 @@ class DimUser(Base):
 
 
 class DimProduct(Base):
-    """Bảng chiều sản phẩm."""
+    """Bảng chiều sản phẩm (Amazon Metadata + Open Food Facts)."""
 
     __tablename__ = "dim_product"
 
     product_id = Column(String(100), primary_key=True, index=True)
-    product_name = Column(String(255), nullable=False)
+    product_name = Column(Text, nullable=False)
     category_id = Column(
         String(100), ForeignKey("dim_category.category_id"), nullable=True, index=True
     )
     price = Column(Numeric(12, 2), default=0.00)
-    brand = Column(String(100), nullable=True)
+    brand = Column(String(255), nullable=True)
     description = Column(Text, nullable=True)
+    ingredients_text = Column(Text, nullable=True)
 
     category = relationship("DimCategory", back_populates="products")
     interactions = relationship("FactInteraction", back_populates="product")
@@ -138,13 +140,13 @@ class DimTime(Base):
     month = Column(Integer, nullable=False)
     quarter = Column(Integer, nullable=False)
     year = Column(Integer, nullable=False)
-    day_of_week = Column(Integer, nullable=False)
+    day_of_week = Column(String(20), nullable=False)
 
     interactions = relationship("FactInteraction", back_populates="time")
 
 
 class FactInteraction(Base):
-    """Bảng sự kiện tương tác và giao dịch."""
+    """Bảng sự kiện tương tác và đánh giá."""
 
     __tablename__ = "fact_interactions"
 
@@ -158,10 +160,10 @@ class FactInteraction(Base):
     time_id = Column(
         BigInteger, ForeignKey("dim_time.time_id"), nullable=False, index=True
     )
-    event_type = Column(String(50), nullable=False, index=True)
-    rating_value = Column(Numeric(3, 2), nullable=True)
-    quantity = Column(Integer, default=1)
-    total_amount = Column(Numeric(12, 2), default=0.00)
+    rating_score = Column(Numeric(3, 2), nullable=True)
+    review_text = Column(Text, nullable=True)
+    helpful_vote = Column(Integer, default=0)
+    event_type = Column(String(50), default="review", index=True)
 
     user = relationship("DimUser", back_populates="interactions")
     product = relationship("DimProduct", back_populates="interactions")
@@ -209,13 +211,30 @@ def test_connection() -> bool:
         return False
 
 
-def init_db(schema_file: Optional[str] = None):
+def init_db(schema_file: Optional[str] = None, drop_first: bool = False):
     """Khởi tạo toàn bộ bảng và chỉ mục theo schema SQL hoặc ORM."""
     project_root = Path(__file__).resolve().parent.parent
     if schema_file is None:
         schema_file = project_root / "sql" / "schema.sql"
     else:
         schema_file = Path(schema_file)
+
+    if drop_first:
+        print(" Đang xóa các bảng cũ để tái tạo schema mới (drop_first=True)...")
+        tables_reverse_order = [
+            "fact_interactions",
+            "dim_product",
+            "dim_category",
+            "dim_user",
+            "dim_time",
+        ]
+        with engine.connect() as conn:
+            for tbl in tables_reverse_order:
+                try:
+                    conn.execute(text(f"DROP TABLE IF EXISTS {tbl} CASCADE;"))
+                except Exception:
+                    pass
+            conn.commit()
 
     if engine.dialect.name == "postgresql" and schema_file.exists():
         print(f" Đang đọc và thực thi DDL PostgreSQL từ file: {schema_file}...")

@@ -1,9 +1,9 @@
-"""Module nạp (Load) dữ liệu vào PostgreSQL Data Warehouse theo đúng thứ tự Star Schema."""
+"""Module nạp (Load) dữ liệu vào PostgreSQL / MySQL / SQLite Data Warehouse theo đúng chuẩn Star Schema."""
 
 import logging
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Optional
 
 import pandas as pd
 from sqlalchemy import text
@@ -16,6 +16,30 @@ logging.basicConfig(
 logger = logging.getLogger("ETL.Load")
 
 
+def truncate_tables(engine: Engine):
+    """Xóa dữ liệu cũ theo thứ tự Fact trước, Dim sau để tuân thủ ràng buộc toàn vẹn khóa ngoại."""
+    logger.info("Đang dọn dẹp dữ liệu cũ trong Data Warehouse...")
+    tables_reverse_order = [
+        "fact_interactions",
+        "dim_product",
+        "dim_category",
+        "dim_user",
+        "dim_time",
+    ]
+    with engine.connect() as conn:
+        for tbl in tables_reverse_order:
+            try:
+                # PostgreSQL / MySQL TRUNCATE CASCADE
+                conn.execute(text(f"TRUNCATE TABLE {tbl} CASCADE;"))
+            except Exception:
+                try:
+                    conn.execute(text(f"DELETE FROM {tbl};"))
+                except Exception:
+                    pass
+        conn.commit()
+    logger.info("-> Dọn dẹp dữ liệu cũ hoàn tất.")
+
+
 def load_table(
     df: pd.DataFrame,
     table_name: str,
@@ -23,26 +47,31 @@ def load_table(
     if_exists: str = "append",
     chunksize: int = 5000,
 ) -> int:
-    """Nạp một DataFrame vào bảng cơ sở dữ liệu sử dụng bulk loading.
+    """Nạp một DataFrame vào bảng cơ sở dữ liệu với chunking và method='multi'.
 
     Args:
-        df: DataFrame chứa dữ liệu đã làm sạch.
+        df: DataFrame chứa dữ liệu sạch cần nạp.
         table_name: Tên bảng đích (viết thường).
-        engine: SQLAlchemy Engine kết nối tới DWH.
+        engine: SQLAlchemy Engine kết nối tới CSDL.
         if_exists: 'append' hoặc 'replace'.
-        chunksize: Số lượng bản ghi mỗi batch (mặc định 5000).
+        chunksize: Số lượng bản ghi mỗi batch (mặc định 5000 cho Fact_Interactions).
 
     Returns:
         Số lượng bản ghi đã nạp thành công.
     """
-    # Bản đồ khóa chính để chống trùng lặp khi chạy lại pipeline
+    table_lower = table_name.lower()
+    total_rows = len(df)
+    if total_rows == 0:
+        logger.info(f"Bảng '{table_name}' không có dữ liệu để nạp.")
+        return 0
+
+    # Khử trùng lặp khóa chính nếu bảng đã có dữ liệu từ trước
     pk_map = {
         "dim_category": "category_id",
         "dim_user": "user_id",
         "dim_product": "product_id",
         "dim_time": "time_id",
     }
-    table_lower = table_name.lower()
     pk_col = pk_map.get(table_lower)
     insert_df = df
 
@@ -58,21 +87,22 @@ def load_table(
         except Exception:
             pass
 
-    total_rows = len(insert_df)
-    if total_rows == 0:
-        logger.info(f"Bảng '{table_name}' đã cập nhật đầy đủ (không có bản ghi mới).")
+    rows_to_insert = len(insert_df)
+    if rows_to_insert == 0:
+        logger.info(f"Bảng '{table_name}' đã đầy đủ dữ liệu (không cần nạp thêm).")
         return 0
 
+    # Tự động điều chỉnh chunksize thích hợp: SQLite tối đa 999 biến tham số; PostgreSQL hỗ trợ 5000+
+    dialect = engine.dialect.name.lower()
+    actual_chunksize = min(chunksize, 150) if dialect == "sqlite" else chunksize
+
     start_time = time.time()
-    # Tự động điều chỉnh chunksize cho SQLite để tránh vượt quá giới hạn 999 biến SQL
-    actual_chunksize = min(chunksize, 100) if engine.dialect.name == "sqlite" else chunksize
     logger.info(
-        f"Bắt đầu nạp bảng '{table_name}': {total_rows:,} dòng "
-        f"(chunksize={actual_chunksize}, method='multi')..."
+        f"Bắt đầu nạp bảng '{table_name}': {rows_to_insert:,} dòng "
+        f"(chunksize={actual_chunksize}, method='multi', dialect={dialect.upper()})..."
     )
 
     try:
-        # Sử dụng bulk insert của Pandas với method='multi' tối ưu cho PostgreSQL
         insert_df.to_sql(
             name=table_lower,
             con=engine,
@@ -82,88 +112,69 @@ def load_table(
             method="multi",
         )
         elapsed = time.time() - start_time
-        speed = total_rows / elapsed if elapsed > 0 else total_rows
+        speed = rows_to_insert / elapsed if elapsed > 0 else rows_to_insert
         logger.info(
-            f"-> Nạp '{table_name}' thành công! "
-            f"Thời gian: {elapsed:.2f}s | Tốc độ: {speed:,.0f} dòng/s."
+            f"-> Nạp '{table_name}' THÀNH CÔNG! "
+            f"Đã nạp: {rows_to_insert:,} dòng | Thời gian: {elapsed:.2f}s | Tốc độ: {speed:,.0f} dòng/s."
         )
-        return total_rows
+        return rows_to_insert
 
     except Exception as exc:
-        logger.error(f"Lỗi khi nạp vào bảng '{table_name}': {exc}")
+        logger.error(f"Lỗi khi nạp bảng '{table_name}': {exc}")
         raise exc
 
 
-def truncate_tables(engine: Engine):
-    """Xóa trắng dữ liệu cũ theo thứ tự Fact trước, Dim sau để tránh lỗi FK."""
-    logger.info("Đang dọn dẹp dữ liệu cũ trong Data Warehouse...")
-    tables_reverse_order = [
-        "fact_interactions",
-        "dim_product",
-        "dim_category",
-        "dim_user",
-        "dim_time",
-    ]
-    with engine.connect() as conn:
-        for tbl in tables_reverse_order:
-            try:
-                conn.execute(text(f"TRUNCATE TABLE {tbl} CASCADE;"))
-            except Exception:
-                # Nếu bảng chưa tồn tại hoặc database là SQLite thì dùng DELETE
-                try:
-                    conn.execute(text(f"DELETE FROM {tbl};"))
-                except Exception:
-                    pass
-        conn.commit()
-    logger.info("-> Dọn dẹp dữ liệu cũ hoàn tất.")
-
-
-def save_processed_staging(tables: dict[str, pd.DataFrame], output_dir: Optional[Path] = None):
-    """Lưu bản sao dữ liệu sạch vào data/processed/ làm tầng Staging (ưu tiên Parquet, fallback CSV)."""
-    project_root = Path(__file__).resolve().parent.parent.parent
+def save_processed_staging(tables: Dict[str, pd.DataFrame], output_dir: Optional[Path] = None):
+    """Lưu trữ dữ liệu sạch vào data/processed/ làm tầng Staging (Parquet và CSV)."""
+    project_root = Path(__file__).resolve().parents[2]
     if output_dir is None:
         output_dir = project_root / "data" / "processed"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for tbl_name, df in tables.items():
         try:
-            file_path = output_dir / f"{tbl_name}.parquet"
-            df.to_parquet(file_path, index=False)
-            logger.debug(f"Đã lưu staging Parquet: {file_path.name} ({len(df):,} dòng)")
-        except (ImportError, Exception):
-            file_path = output_dir / f"{tbl_name}.csv"
-            df.to_csv(file_path, index=False, encoding="utf-8")
-            logger.debug(f"Đã lưu staging CSV: {file_path.name} ({len(df):,} dòng)")
+            p_file = output_dir / f"{tbl_name}.parquet"
+            df.to_parquet(p_file, index=False)
+            logger.debug(f"Đã lưu Parquet staging: {p_file.name} ({len(df):,} dòng)")
+        except Exception:
+            pass
+
+        try:
+            c_file = output_dir / f"{tbl_name}.csv"
+            df.to_csv(c_file, index=False, encoding="utf-8")
+            logger.debug(f"Đã lưu CSV staging: {c_file.name} ({len(df):,} dòng)")
+        except Exception:
+            pass
 
 
 def load_dwh(
-    tables: dict[str, pd.DataFrame],
+    tables: Dict[str, pd.DataFrame],
     engine: Engine,
     truncate_first: bool = False,
     chunksize: int = 5000,
-) -> dict[str, int]:
-    """Điều phối nạp dữ liệu vào toàn bộ Star Schema theo đúng thứ tự phân cấp.
+) -> Dict[str, int]:
+    """Điều phối nạp dữ liệu vào toàn bộ Star Schema theo đúng thứ tự ràng buộc khóa ngoại.
 
     Thứ tự nạp nghiêm ngặt:
       1. Dim_Category
-      2. Dim_Product
-      3. Dim_User
+      2. Dim_User
+      3. Dim_Product (có khóa ngoại category_id)
       4. Dim_Time
-      5. Fact_Interactions
+      5. Fact_Interactions (có khóa ngoại user_id, product_id, time_id)
     """
-    logger.info("================ BẮT ĐẦU LOAD VÀO DATA WAREHOUSE ================")
+    logger.info("================ BẮT ĐẦU LOAD VÀO DATA WAREHOUSE (STAR SCHEMA) ================")
 
     if truncate_first:
         truncate_tables(engine)
 
-    # Lưu bản sao staging Parquet
+    # Lưu bản sao staging vào data/processed/
     save_processed_staging(tables)
 
-    # Ánh xạ tên key với tên bảng chuẩn trong SQL
+    # Thứ tự nạp tuân thủ chặt chẽ khóa ngoại
     ordered_tables = [
         ("dim_category", tables["dim_category"]),
-        ("dim_product", tables["dim_product"]),
         ("dim_user", tables["dim_user"]),
+        ("dim_product", tables["dim_product"]),
         ("dim_time", tables["dim_time"]),
         ("fact_interactions", tables["fact_interactions"]),
     ]
@@ -179,5 +190,5 @@ def load_dwh(
         )
         loaded_counts[tbl_name] = count
 
-    logger.info("================ KẾT THÚC LOAD THÀNH CÔNG ================")
+    logger.info("================ TOÀN BỘ BẢNG ĐÃ ĐƯỢC NẠP THÀNH CÔNG VÀO DWH ================")
     return loaded_counts
